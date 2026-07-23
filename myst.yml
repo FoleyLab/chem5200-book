@@ -1,0 +1,32 @@
+version: 1
+project:
+  title: "CHEM 5200: Computational Chemistry"
+  authors:
+    - name: Jay Foley
+  keywords: []
+  bibliography:
+    - references.bib
+  exclude:
+    - _build/**
+    - instructor_solutions/**
+  toc:
+    - file: intro.md
+    - title: Lecture Notes
+      children: []
+    - title: Computational Sets
+      children:
+        - file: notebooks/newton_raphson.ipynb
+        - file: notebooks/spin_one_half.ipynb
+        - file: notebooks/two_qubit_entangled.ipynb
+        - file: notebooks/morse_oscillator.ipynb
+        - file: notebooks/hf_freq.ipynb
+    - title: Problem Sets
+      children: []
+    - title: Resources
+      children: []
+
+site:
+  template: book-theme
+  title: "CHEM 5200: Computational Chemistry"
+  nav: []
+  actions: []
