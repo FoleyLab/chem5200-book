@@ -1,6 +1,8 @@
 version: 1
 project:
   title: "CHEM 5200: Computational Chemistry"
+  github: FoleyLab/chem5200-book
+  jupyter: true
   authors:
     - name: Jay Foley
   keywords: []
