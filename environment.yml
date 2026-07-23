@@ -1,0 +1,9 @@
+name: chem5200-book
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - nodejs
+  - pip
+  - pip:
+      - jupyter-book==2.1.6
