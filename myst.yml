@@ -5,22 +5,25 @@ project:
   authors:
     - name: Jay Foley
   keywords: []
-  bibliography:
-    - references.bib
   exclude:
     - _build/**
     - instructor_solutions/**
   toc:
     - file: intro.md
     - title: Lecture Notes
-      children: []
+      children: 
+        - file: lectures/qm_postulates_two_level.ipynb
+        - file: lectures/qm_postulates.ipynb
+        - file: lectures/translation.ipynb 
+        - file: lectures/vibration.ipynb
+        - file: lectures/variation.ipynb
+        - file: lectures/perturbation.ipynb 
     - title: Computational Sets
       children:
-        - file: notebooks/newton_raphson.ipynb
         - file: notebooks/spin_one_half.ipynb
+        - file: notebooks/newton_raphson.ipynb
         - file: notebooks/two_qubit_entangled.ipynb
-        - file: notebooks/morse_oscillator.ipynb
-        - file: notebooks/hf_freq.ipynb
+        - file: notebooks/vibronic_spectra_MgH_1.ipynb 
     - title: Problem Sets
       children: []
     - title: Resources
