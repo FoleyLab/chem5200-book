@@ -21,8 +21,9 @@ project:
     - title: Computational Sets
       children:
         - file: notebooks/spin_one_half.ipynb
+        - file: notebooks/Basis_Sets_student.ipynb 
         - file: notebooks/newton_raphson.ipynb
-        - file: notebooks/two_qubit_entangled.ipynb
+        - file: notebooks/two_qubit_entangled_DR.ipynb
         - file: notebooks/vibronic_spectra_MgH_1.ipynb 
     - title: Problem Sets
       children: []
