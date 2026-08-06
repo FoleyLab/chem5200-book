@@ -1,0 +1,115 @@
+
+Host: CHEM4VYDH4JALT
+
+Timers On : Thu Aug  6 11:48:17 2026
+Timers Off: Thu Aug  6 12:00:33 2026
+
+Wall Time:      735.52 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+V: Grid                             :      0.633u      0.100s      0.419w     80 calls
+build grid                          :      0.267u      0.083s      0.206w     80 calls
+post-process grid                   :      0.367u      0.017s      0.210w     80 calls
+DFH: sparsity prep                  :      6.133u      0.800s      4.199w     80 calls
+Libint2ERI::Libint2ERI              :     13.383u      2.467s      9.514w    360 calls
+DFH: initialize()                   :      8.950u      1.250s      6.178w     80 calls
+DFH: AO Construction                :      1.100u      0.017s      0.658w     80 calls
+DFH: AO-Met. Contraction            :      0.650u      0.000s      0.411w    120 calls
+Libint2ErfERI::Libint2ErfERI        :      2.500u      0.200s      1.657w     40 calls
+DFH: wAO Construction               :      0.617u      0.017s      0.360w     40 calls
+DFH: wAO Copy                       :      0.050u      0.000s      0.023w     40 calls
+HF: Form core H                     :      0.100u      0.067s      0.129w    120 calls
+HF: Form S/X                        :      0.050u      0.000s      0.028w    120 calls
+HF: Guess                           :     12.083u      3.183s      9.236w    120 calls
+SAD Guess                           :     11.983u      3.150s      9.179w    120 calls
+HF: Form G                          :     40.250u      1.950s     25.164w    980 calls
+RV: Form V                          :     36.367u      1.433s     22.715w    636 calls
+Properties                          :     39.617u      0.467s     23.927w 481064 calls
+Functional                          :     19.150u      0.550s     11.605w 481064 calls
+V_xc                                :     13.617u      0.217s      8.525w 262034 calls
+JK: D                               :      0.000u      0.000s      0.006w   1512 calls
+JK: USO2AO                          :      0.050u      0.017s      0.067w   1512 calls
+JK: JK                              :      7.167u      0.950s      4.878w   1512 calls
+DFH: compute_JK()                   :      3.517u      0.683s      2.579w   1168 calls
+DFH: Grabbing AOs                   :      0.000u      0.000s      0.001w   1168 calls
+DFH: compute_J                      :      0.683u      0.017s      0.400w   1168 calls
+DFH: compute_K                      :      2.817u      0.000s      1.783w   1168 calls
+DFH: compute_wK()                   :      1.550u      0.233s      1.107w    546 calls
+PK computes JK                      :      2.100u      0.033s      1.184w    344 calls
+JK: AO2USO                          :      0.183u      0.000s      0.121w   1512 calls
+HF: Form F                          :      0.000u      0.000s      0.004w    980 calls
+HF: Form D                          :      0.000u      0.000s      0.002w    980 calls
+HF: DIIS                            :      1.167u      0.367s      1.450w    860 calls
+HF: Form C                          :      0.283u      0.017s      0.199w    860 calls
+RV: Form Vx                         :    108.900u      2.917s     67.261w    532 calls
+Derivative Properties               :     40.883u      0.617s     25.403w 536868 calls
+V_XCd                               :     29.600u      0.567s     18.229w 536868 calls
+Total PK formation time             :     26.667u      1.267s     16.783w     40 calls
+CIWave: CIvect write                :      0.033u      0.950s      0.554w   3400 calls
+CIWave: CIvect read                 :      0.133u      2.483s      1.523w  21360 calls
+CIWave: s2                          :      5.100u      0.000s      3.087w    400 calls
+CIWave: s3                          :     17.200u      0.017s     10.464w    400 calls
+CIWave: opdm                        :      3.200u      0.033s      1.943w     80 calls
+
+--------------------------------------------------------------------------------------
+V: Grid                             :      0.633u      0.100s      0.419w     80 calls
+| build grid                        :      0.267u      0.083s      0.206w     80 calls
+| post-process grid                 :      0.367u      0.017s      0.210w     80 calls
+DFH: sparsity prep                  :      6.133u      0.800s      4.199w     80 calls
+| Libint2ERI::Libint2ERI            :      3.933u      0.800s      2.916w     80 calls
+DFH: initialize()                   :      8.950u      1.250s      6.178w     80 calls
+| Libint2ERI::Libint2ERI            :      3.500u      0.417s      2.340w    160 calls
+| DFH: AO Construction              :      1.100u      0.017s      0.658w     80 calls
+| DFH: AO-Met. Contraction          :      0.650u      0.000s      0.411w    120 calls
+| Libint2ErfERI::Libint2ErfERI      :      2.500u      0.200s      1.657w     40 calls
+| DFH: wAO Construction             :      0.617u      0.017s      0.360w     40 calls
+| DFH: wAO Copy                     :      0.050u      0.000s      0.023w     40 calls
+HF: Form core H                     :      0.100u      0.067s      0.129w    120 calls
+HF: Form S/X                        :      0.050u      0.000s      0.028w    120 calls
+HF: Guess                           :     12.083u      3.183s      9.236w    120 calls
+| SAD Guess                         :     11.983u      3.150s      9.179w    120 calls
+HF: Form G                          :     40.250u      1.950s     25.164w    980 calls
+| RV: Form V                        :     36.367u      1.433s     22.715w    636 calls
+| | Properties                      :     12.700u      0.233s      7.773w 262034 calls
+| | Functional                      :      9.467u      0.383s      5.890w 262034 calls
+| | V_xc                            :     13.617u      0.217s      8.525w 262034 calls
+| JK: D                             :      0.000u      0.000s      0.003w    980 calls
+| JK: USO2AO                        :      0.017u      0.000s      0.019w    980 calls
+| JK: JK                            :      3.617u      0.417s      2.272w    980 calls
+| | DFH: compute_JK()               :      1.033u      0.250s      0.703w    636 calls
+| | | DFH: Grabbing AOs             :      0.000u      0.000s      0.000w    636 calls
+| | | DFH: compute_J                :      0.233u      0.000s      0.111w    636 calls
+| | | DFH: compute_K                :      0.783u      0.000s      0.418w    636 calls
+| | DFH: compute_wK()               :      0.483u      0.133s      0.380w    292 calls
+| | PK computes JK                  :      2.100u      0.033s      1.184w    344 calls
+| JK: AO2USO                        :      0.083u      0.000s      0.040w    980 calls
+HF: Form F                          :      0.000u      0.000s      0.004w    980 calls
+HF: Form D                          :      0.000u      0.000s      0.002w    980 calls
+HF: DIIS                            :      1.167u      0.367s      1.450w    860 calls
+HF: Form C                          :      0.283u      0.017s      0.199w    860 calls
+JK: D                               :      0.000u      0.000s      0.003w    532 calls
+JK: USO2AO                          :      0.033u      0.017s      0.047w    532 calls
+JK: JK                              :      3.550u      0.533s      2.606w    532 calls
+| DFH: compute_JK()                 :      2.483u      0.433s      1.875w    532 calls
+| | DFH: Grabbing AOs               :      0.000u      0.000s      0.000w    532 calls
+| | DFH: compute_J                  :      0.450u      0.017s      0.288w    532 calls
+| | DFH: compute_K                  :      2.033u      0.000s      1.365w    532 calls
+| DFH: compute_wK()                 :      1.067u      0.100s      0.728w    254 calls
+JK: AO2USO                          :      0.100u      0.000s      0.080w    532 calls
+RV: Form Vx                         :    108.900u      2.917s     67.261w    532 calls
+| Properties                        :     26.917u      0.233s     16.154w 219030 calls
+| Functional                        :      9.683u      0.167s      5.715w 219030 calls
+| Derivative Properties             :     40.883u      0.617s     25.403w 536868 calls
+| V_XCd                             :     29.600u      0.567s     18.229w 536868 calls
+Total PK formation time             :     26.667u      1.267s     16.783w     40 calls
+| Libint2ERI::Libint2ERI            :      3.933u      0.850s      2.840w     80 calls
+Libint2ERI::Libint2ERI              :      2.017u      0.400s      1.418w     40 calls
+CIWave: CIvect write                :      0.033u      0.950s      0.554w   3400 calls
+CIWave: CIvect read                 :      0.133u      2.483s      1.505w  21120 calls
+CIWave: s2                          :      5.100u      0.000s      3.087w    400 calls
+CIWave: s3                          :     17.200u      0.017s     10.464w    400 calls
+CIWave: opdm                        :      3.200u      0.033s      1.943w     80 calls
+| CIWave: CIvect read               :      0.000u      0.000s      0.018w    240 calls
+
+**************************************************************************************
