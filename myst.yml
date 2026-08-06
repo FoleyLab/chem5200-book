@@ -8,6 +8,7 @@ project:
   exclude:
     - _build/**
     - instructor_solutions/**
+    - style/**
   toc:
     - file: intro.md
     - title: Lecture Notes
