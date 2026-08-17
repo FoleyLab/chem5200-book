@@ -30,6 +30,6 @@ project:
 
 site:
   template: book-theme
-  title: "CHEM 5200: Computational Chemistry"
+  title: "CHEM 5200: Computational Chemistry at UNC Charlotte"
   nav: []
   actions: []
