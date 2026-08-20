@@ -30,11 +30,11 @@ project:
     - title: Psi4 Numpy Basics
       children:
         - file: resources/1a_Getting-Started.ipynb
-        - file: notebooks/1b_molecule.ipynb
-        - file: notebooks/1c_psi4-numpy-datasharing.ipynb
-        - file: notebooks/1d_wavefunction.ipynb
-        - file: notebooks/1e_mints-helper.ipynb
-        - file: notebooks/1f_tensor-manipulation.ipynb
+        - file: resources/1b_molecule.ipynb
+        - file: resources/1c_psi4-numpy-datasharing.ipynb
+        - file: resources/1d_wavefunction.ipynb
+        - file: resources/1e_mints-helper.ipynb
+        - file: resources/1f_tensor-manipulation.ipynb
 site:
   template: book-theme
   title: "CHEM 5200: Computational Chemistry at UNC Charlotte"
