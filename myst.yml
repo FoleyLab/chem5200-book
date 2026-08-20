@@ -21,11 +21,11 @@ project:
         - file: lectures/perturbation.ipynb 
     - title: Computational Sets
       children:
-        - file: notebooks/Basis_Sets_student.ipynb
         - file: notebooks/spin_one_half.ipynb
+        - file: notebooks/Basis_Sets_student.ipynb
         - file: notebooks/newton_raphson.ipynb
         - file: notebooks/two_qubit_entangled_DR.ipynb
-        - file: notebooks/vibronic_spectra_MgH_1.ipynb 
+        - file: notebooks/vibronic_spectra_MgH_1.ipynb
         - file: notebooks/cqed_demo.ipynb
 
 site:
