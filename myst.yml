@@ -27,7 +27,14 @@ project:
         - file: notebooks/two_qubit_entangled_DR.ipynb
         - file: notebooks/vibronic_spectra_MgH_1.ipynb
         - file: notebooks/cqed_demo.ipynb
-
+    - title: Psi4 Numpy Basics
+      children:
+        - file: resources/1a_Getting-Started.ipynb
+        - file: notebooks/1b_molecule.ipynb
+        - file: notebooks/1c_psi4-numpy-datasharing.ipynb
+        - file: notebooks/1d_wavefunction.ipynb
+        - file: notebooks/1e_mints-helper.ipynb
+        - file: notebooks/1f_tensor-manipulation.ipynb
 site:
   template: book-theme
   title: "CHEM 5200: Computational Chemistry at UNC Charlotte"
