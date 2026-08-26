@@ -1,0 +1,881 @@
+   => Loading Basis Set <=
+
+    Name: CC-PVDZ
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1   entry O          line   198 file /Users/jfoley19/miniforge3/envs/p4dev/share/psi4/basis/cc-pvdz.gbs 
+    atoms 2-3 entry H          line    22 file /Users/jfoley19/miniforge3/envs/p4dev/share/psi4/basis/cc-pvdz.gbs 
+
+
+Scratch directory: /tmp/
+   => Libint2 <=
+
+    Primary   basis highest AM E, G, H:  7, 6, 3
+    Auxiliary basis highest AM E, G, H:  7, 7, 4
+    Onebody   basis highest AM E, G, H:  -, -, -
+    Solid Harmonics ordering:            Gaussian
+
+*** tstart() called on CHEM4VYDH4JALT
+*** at Tue Aug 25 20:03:09 2026
+
+   => Loading Basis Set <=
+
+    Name: CC-PVDZ
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1   entry O          line   198 file /Users/jfoley19/miniforge3/envs/p4dev/share/psi4/basis/cc-pvdz.gbs 
+    atoms 2-3 entry H          line    22 file /Users/jfoley19/miniforge3/envs/p4dev/share/psi4/basis/cc-pvdz.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              RHF Reference
+                        1 Threads,    476 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c1
+    Full point group: C2v
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         O            0.000000000000     0.000000000000    -0.075791843599    15.994914619570
+         H            0.000000000000    -0.866811828967     0.601435779259     1.007825032230
+         H            0.000000000000     0.866811828967     0.601435779259     1.007825032230
+
+  Running in c1 symmetry.
+
+  Rotational constants: A =     20.53324  B =     11.13094  C =      7.21807 [cm^-1]
+  Rotational constants: A = 615570.98071  B = 333697.07813  C = 216392.23582 [MHz]
+  Nuclear repulsion =    8.002366482173422
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 10
+  Nalpha       = 5
+  Nbeta        = 5
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is PK.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-06
+  Integral threshold = 1.00e-12
+
+  ==> Primary Basis <==
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> Integral Setup <==
+
+  Using in-core PK algorithm.
+   Calculation information:
+      Number of atoms:                   3
+      Number of AO shells:              12
+      Number of primitives:             32
+      Number of atomic orbitals:        25
+      Number of basis functions:        24
+
+      Integral cutoff                 1.00e-12
+      Number of threads:                 1
+
+  Performing in-core PK
+  Using 90300 doubles for integral storage.
+  We computed 3081 shell quartets total.
+  Whereas there are 3081 unique shell quartets.
+
+  ==> DiskJK: Disk-Based J/K Matrices <==
+
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    Memory [MiB]:              357
+    Schwarz Cutoff:          1E-12
+
+    OpenMP threads:              1
+
+  Minimum eigenvalue in the overlap matrix is 4.6103806577E-02.
+  Reciprocal condition number of the overlap matrix is 1.3490650528E-02.
+    Using symmetric orthogonalization.
+
+  ==> Pre-Iterations <==
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF (no occupation information).
+
+   -------------------------
+    Irrep   Nso     Nmo    
+   -------------------------
+     A         24      24 
+   -------------------------
+    Total      24      24
+   -------------------------
+
+  ==> Iterations <==
+
+                        Total Energy        Delta E     RMS |[F,P]|
+
+   @RHF iter SAD:   -76.11311398036020   -7.61131e+01   0.00000e+00 
+   @RHF iter   1:   -75.89089705555836    2.22217e-01   1.89583e-02 ADIIS/DIIS
+   @RHF iter   2:   -75.96914189683244   -7.82448e-02   9.76765e-03 ADIIS/DIIS
+   @RHF iter   3:   -75.98860303206467   -1.94611e-02   2.21230e-03 ADIIS/DIIS
+   @RHF iter   4:   -75.98975101672933   -1.14798e-03   2.88818e-04 ADIIS/DIIS
+   @RHF iter   5:   -75.98979355611525   -4.25394e-05   6.79104e-05 DIIS
+   @RHF iter   6:   -75.98979571685960   -2.16074e-06   9.81500e-06 DIIS
+   @RHF iter   7:   -75.98979578624436   -6.93848e-08   1.21836e-06 DIIS
+   @RHF iter   8:   -75.98979578720090   -9.56547e-10   3.17581e-07 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1A    -20.574752     2A     -1.277566     3A     -0.629912  
+       4A     -0.541684     5A     -0.486545  
+
+    Virtual:                                                              
+
+       6A      0.157621     7A      0.229512     8A      0.704679  
+       9A      0.744563    10A      1.170810    11A      1.186419  
+      12A      1.268027    13A      1.450914    14A      1.473927  
+      15A      1.658468    16A      1.804244    17A      1.891430  
+      18A      2.149116    19A      2.200244    20A      3.172600  
+      21A      3.209688    22A      3.328097    23A      3.721354  
+      24A      3.985472  
+
+    Final Occupation by Irrep:
+              A 
+    DOCC [     5 ]
+    NA   [     5 ]
+    NB   [     5 ]
+
+  @RHF Final Energy:   -75.98979578720090
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              8.0023664821734215
+    One-Electron Energy =                -120.9634166558258102
+    Two-Electron Energy =                  36.9712543864514771
+    Total Energy =                        -75.9897957872009044
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+
+ Multipole Moments:
+
+ ------------------------------------------------------------------------------------
+     Multipole            Electronic (a.u.)      Nuclear  (a.u.)        Total (a.u.)
+ ------------------------------------------------------------------------------------
+
+ L = 1.  Multiply by 2.5417464519 to convert [e a0] to [Debye]
+ Dipole X            :          0.0000000            0.0000000            0.0000000
+ Dipole Y            :          0.0000000            0.0000000            0.0000000
+ Dipole Z            :         -0.2709426            1.1272912            0.8563486
+ Magnitude           :                                                    0.8563486
+
+ ------------------------------------------------------------------------------------
+
+*** tstop() called on CHEM4VYDH4JALT at Tue Aug 25 20:03:09 2026
+Module time:
+	user time   =       0.13 seconds =       0.00 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       0.13 seconds =       0.00 minutes
+	system time =       0.02 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_01
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_02
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_03
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_04
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_05
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_06
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_07
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_08
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_09
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_10
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_11
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_12
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_13
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_14
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_15
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_16
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_17
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_18
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_19
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_20
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_21
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_22
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_23
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
+  ==> One Electron Grid Properties (v2.0) <==
+
+  ==> CubicScalarGrid <==
+
+    Filepath     = scf_movie/iter_24
+    Total Points =            34944
+    XYZ Blocking =               10
+    X Points     =               28
+    Y Points     =               39
+    Z Points     =               32
+    X Spacing    =        3.000E-01
+    Y Spacing    =        3.000E-01
+    Z Spacing    =        3.000E-01
+    X Minimum    =       -4.050E+00
+    Y Minimum    =       -5.700E+00
+    Z Minimum    =       -4.153E+00
+    X Maximum    =        4.050E+00
+    Y Maximum    =        5.700E+00
+    Z Maximum    =        5.147E+00
+
+  Basis Set: CC-PVDZ
+    Blend: CC-PVDZ
+    Number of shells: 12
+    Number of basis functions: 24
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: true
+    Max angular momentum: 2
+
