@@ -1,0 +1,354 @@
+% ============================================================================
+\section{Problems}
+\label{sec:problems}
+% ============================================================================
+
+These are the problems that close the notebook.\ifsolutions{} Numerical answers quoted
+in the solutions have been checked against direct diagonalization or propagation.\fi
+
+% ---------------------------------------------------------------------------
+\begin{problem}{The excitonic dimer}
+\label{prob:exciton}
+Two chromophores sit close enough that their transition dipoles interact. In the
+singly-excited basis $\{\ket{e_1 g_2},\ket{g_1 e_2}\}$ the Hamiltonian is
+\[
+\Hop = \begin{bmatrix}\varepsilon_1 & J \\ J & \varepsilon_2\end{bmatrix},
+\]
+with $J$ the excitonic coupling.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=1pt]
+\item Identify $\varepsilon_0$, $d_z$ and $d_x$.
+\item For identical chromophores, find the eigenstates and energies. The splitting
+$2|J|$ is the \emph{Davydov splitting}.
+\item The transition dipole to the symmetric state is
+$\bm{\mu}_1+\bm{\mu}_2$ and to the antisymmetric state $\bm{\mu}_1-\bm{\mu}_2$. In the
+point-dipole approximation, $J>0$ for a side-by-side (H-aggregate) geometry and $J<0$
+for head-to-tail (J-aggregate). In each case, is the \emph{bright} state the upper or
+lower one, and does the absorption red- or blue-shift relative to the monomer?
+\item Adapt the code from Part 3 of the notebook to plot the two exciton energies and
+their oscillator strengths against $\varepsilon_1-\varepsilon_2$ at fixed $J$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} By inspection, $\varepsilon_0 = \half(\varepsilon_1+\varepsilon_2)$,
+$d_z = \varepsilon_1-\varepsilon_2$, $d_x = 2J$, $d_y = 0$.
+
+\textbf{(b)} Identical chromophores means $d_z=0$, hence $\theta=\pi/2$ and the
+eigenstates are $\ket{\pm} = \tfrac{1}{\sqrt2}\!\left(\ket{e_1g_2}\pm\ket{g_1e_2}\right)$
+with $E_\pm = \varepsilon \pm J$. Note the sign: the symmetric combination is the
+\emph{upper} state when $J>0$ and the \emph{lower} state when $J<0$.
+
+\textbf{(c)} The oscillator strength goes as $|\bm{\mu}_1\pm\bm{\mu}_2|^2$. For two
+parallel dipoles, the symmetric combination carries all of it and the antisymmetric
+combination is dark. The point-dipole coupling is
+$J = r^{-3}\!\left[\bm{\mu}_1\!\cdot\!\bm{\mu}_2 - 3(\bm{\mu}_1\!\cdot\!\hat{r})(\bm{\mu}_2\!\cdot\!\hat{r})\right]$:
+side by side ($\bm{\mu}\perp\hat{r}$) gives $J=+\mu^2/r^3>0$, head to tail
+($\bm{\mu}\parallel\hat{r}$) gives $J=-2\mu^2/r^3<0$.
+
+\smallskip
+\begin{center}\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+Geometry & Sign of $J$ & Bright (symmetric) state & Shift \\
+\midrule
+H-aggregate (side by side) & $J>0$ & upper, at $\varepsilon+J$ & \textbf{blue} \\
+J-aggregate (head to tail) & $J<0$ & lower, at $\varepsilon+J$ & \textbf{red} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\smallskip
+
+\noindent
+This is why J-aggregates show the narrow, red-shifted, intense band that makes them
+useful as photographic sensitizers and light-harvesting mimics, while H-aggregates are
+blue-shifted and comparatively dark.
+
+\textbf{(d)} With $d_z\neq0$ the two chromophores are inequivalent, the states are no
+longer exactly symmetric/antisymmetric, and the dark state steals intensity: the
+oscillator strengths become $|\cos(\theta/2)\bm{\mu}_1 \pm \sin(\theta/2)\bm{\mu}_2|^2$
+and neither state is completely dark. Energetic disorder therefore \emph{brightens}
+H-aggregates --- a real and much-studied effect in molecular crystals.
+\end{solution}
+
+% ---------------------------------------------------------------------------
+\begin{problem}{H\"uckel butadiene is two dimers}
+\label{prob:butadiene}
+The $\pi$ system of \emph{trans}-butadiene is a $4\times4$ H\"uckel problem
+($H_{ii}=\alpha$, $H_{i,i+1}=\beta$), but it has a mirror symmetry exchanging
+$1\leftrightarrow4$ and $2\leftrightarrow3$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=1pt]
+\item Form $s_{1,2}$ and $a_{1,2}$, the symmetric and antisymmetric combinations
+$\tfrac{1}{\sqrt2}(p_1\pm p_4)$ and $\tfrac{1}{\sqrt2}(p_2\pm p_3)$, and show that
+$\Hop$ block-diagonalizes into two $2\times2$ blocks.
+\item Identify $d_z$ and $d_x$ for each block and use \cref{eq:eigenvalues} to obtain all
+four $\pi$ energies. Check against the textbook result
+$E = \alpha\pm1.618\beta,\ \alpha\pm0.618\beta$.
+\item Verify by diagonalizing the full $4\times4$ matrix numerically.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} Sites 1 and 4 are not bonded, so $H_{14}=0$. Then
+\[
+\braket{s_1|\Hop|s_1} = \tfrac12(H_{11}+2H_{14}+H_{44}) = \alpha,
+\qquad
+\braket{s_2|\Hop|s_2} = \tfrac12(H_{22}+2H_{23}+H_{33}) = \alpha+\beta,
+\]
+\[
+\braket{s_1|\Hop|s_2} = \tfrac12(H_{12}+H_{13}+H_{42}+H_{43}) = \beta,
+\]
+and every cross term $\braket{s_i|\Hop|a_j}$ vanishes because $\Hop$ commutes with the
+mirror operation while $s$ and $a$ belong to different eigenvalues of it. Repeating for
+the antisymmetric pair (the signs of $H_{23}$ and $H_{14}$ flip) gives
+\[
+\Hop_S = \begin{bmatrix}\alpha & \beta\\ \beta & \alpha+\beta\end{bmatrix},
+\qquad
+\Hop_A = \begin{bmatrix}\alpha & \beta\\ \beta & \alpha-\beta\end{bmatrix}.
+\]
+
+\textbf{(b)} Reading off the Pauli components:
+\[
+\begin{aligned}
+\text{block } S:&\quad \varepsilon_0 = \alpha+\tfrac{\beta}{2}, &\quad d_z &= -\beta, &\quad d_x &= 2\beta;\\
+\text{block } A:&\quad \varepsilon_0 = \alpha-\tfrac{\beta}{2}, &\quad d_z &= +\beta, &\quad d_x &= 2\beta.
+\end{aligned}
+\]
+Both have $|\dvec| = \sqrt{\beta^2+4\beta^2} = \sqrt5\,|\beta|$, so
+\[
+E = \alpha \pm \frac{\beta}{2} \pm \frac{\sqrt5}{2}|\beta|
+  \;=\; \alpha + 1.618\beta,\;\; \alpha+0.618\beta,\;\; \alpha-0.618\beta,\;\; \alpha-1.618\beta,
+\]
+since $\tfrac12(\sqrt5\pm1) = 1.618,\,0.618$ --- the golden ratio and its reciprocal,
+which is where those famous H\"uckel numbers come from. With $\beta<0$ the two lowest
+(occupied) levels are $\alpha+1.618\beta$ (from block $S$) and $\alpha+0.618\beta$
+(from block $A$).
+
+\textbf{(c)} Numerically, with $\alpha=0$ and $\beta=-1$: the full matrix gives
+$\{-1.61803,\,-0.61803,\,+0.61803,\,+1.61803\}$, and the two blocks give
+$\{-1.61803,\,+0.61803\}$ and $\{-0.61803,\,+1.61803\}$ respectively --- the same set.
+
+\smallskip\noindent
+\emph{Why this matters.} Reducing a large Hamiltonian to independent small blocks using
+symmetry is one of the most useful manoeuvres in quantum chemistry, and here it turns a
+$4\times4$ problem into two problems you can solve with \cref{eq:eigenvalues} in your
+head. The same trick underlies symmetry-adapted linear combinations throughout group
+theory.
+\end{solution}
+
+% ---------------------------------------------------------------------------
+\begin{problem}{St\"uckelberg oscillations}
+\label{prob:stuck}
+Modify \texttt{landau\_zener\_numeric} so that instead of one linear sweep,
+$d_z(t) = A\sin(\omega_{\rm sw}t)$ oscillates back and forth through the crossing.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=1pt]
+\item Plot the population in $\ket{\alpha}$ against time over a few periods.
+\item Explain why it does not simply relax toward $1/2$.
+\item Find an amplitude and frequency for which the transfer after \emph{two} passages
+is smaller than after one. What is interfering with what?
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a),(b)} Each passage through the crossing acts as a beamsplitter, putting the
+system into a superposition of the two adiabatic surfaces with amplitudes fixed by
+\cref{eq:lz}. Between passages the two components accumulate \emph{different} dynamical
+phases, $\Delta\phi = \hbar^{-1}\!\oint\!\left(E_+-E_-\right)\dd t$, because the surfaces
+are separated. At the next passage the two amplitudes recombine and interfere. The
+dynamics is therefore a repeated interferometer, not a repeated random draw --- so the
+population does not diffuse to $1/2$, it oscillates. These are St\"uckelberg
+oscillations, and the full sequence is a Landau--Zener--St\"uckelberg interferometer.
+
+\textbf{(c)} Take $V_{DA}=0.35$, $A=6$ and scan $\omega_{\rm sw}$ with $\hbar=1$. The
+ratio (transfer after two passages)/(transfer after one) is strongly non-monotonic ---
+it runs from about $10$ down to about $1$ and back as $\omega_{\rm sw}$ varies over a
+range of order unity. Two representative points:
+
+\smallskip
+\begin{center}\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+$\omega_{\rm sw}$ & transfer after 1 passage & after 2 passages & ratio \\
+\midrule
+$0.450$ & $0.041$ & $0.430$ & $10.4$ \quad(constructive) \\
+$0.700$ & $0.0244$ & $0.0241$ & $0.99$ \quad(destructive) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\smallskip
+
+\noindent
+At $\omega_{\rm sw}\approx0.700$ the second passage almost exactly undoes the first: the
+amplitude transferred on the way out and the amplitude transferred on the way back
+arrive $\pi$ out of phase and cancel. Nothing has been ``untransferred'' in a classical
+sense --- the two \emph{amplitudes} interfere destructively. Changing
+$\omega_{\rm sw}$ by a few percent changes $\Delta\phi$ by order $\pi$ and flips the
+result, which is why the ratio swings so violently.
+\end{solution}
+
+% ---------------------------------------------------------------------------
+\begin{problem}{A genuine $\syo$: Peierls phases}
+\label{prob:peierls}
+A magnetic field attaches a phase to each hopping integral, $\beta\to\beta e^{\ii\phi_B}$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=1pt]
+\item Write $\Hop$ for a two-site dimer with this hopping and identify $d_x$ and $d_y$.
+\item Show that the eigenvalues are independent of $\phi_B$, consistent with
+\cref{sec:sigmay}.
+\item Now take a triangle of three sites, each bond carrying phase $\phi_B$. Show that
+the eigenvalues \emph{do} depend on the total flux $\Phi = 3\phi_B$ and that the
+dependence cannot be rephased away. Diagonalize numerically and plot the three levels
+against flux.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} With $H_{AB} = \beta e^{\ii\phi_B}$ and $\beta$ real,
+$d_x = 2\beta\cos\phi_B$ and $d_y = -2\beta\sin\phi_B$, so
+$\dperp = 2|\beta|$ regardless of $\phi_B$: the phase only rotates $\dvec$ within the
+equatorial plane.
+
+\textbf{(b)} By \cref{eq:eigenvalues} the eigenvalues depend on the transverse components
+only through $\dperp$, so $E_\pm = \varepsilon_0 \pm |\beta|$ for every $\phi_B$.
+Numerically, $\phi_B = 0,\,0.4,\,1.1,\,2.0$ all give $\{-|\beta|,+|\beta|\}$ exactly.
+Equivalently: one rephasing, $\ket{B}\to e^{\ii\phi_B}\ket{B}$, removes the phase
+completely.
+
+\textbf{(c)} For the triangle with $t = \beta e^{\ii\phi_B}$ on each bond taken in a
+consistent circulation,
+\[
+\Hop = \begin{bmatrix} 0 & t & t^{*}\\ t^{*} & 0 & t\\ t & t^{*} & 0\end{bmatrix},
+\qquad
+E_n = 2\beta\cos\!\left(\frac{2\pi n + \Phi}{3}\right),\quad n=0,1,2,
+\qquad \Phi = 3\phi_B .
+\]
+This is verified numerically: at $\Phi=0$ the spectrum is
+$\{-2|\beta|, +|\beta|, +|\beta|\}$ with the familiar doubly degenerate level of a
+H\"uckel triangle; at $\Phi = \pi/2$ it is $\{-1.732,0,+1.732\}|\beta|$; at $\Phi = \pi$
+it is $\{-|\beta|,-|\beta|,+2|\beta|\}$. The degeneracy is lifted and the whole spectrum
+shifts with flux.
+
+The counting argument is the point. Three sites admit three phase choices, but the
+overall phase is unobservable, leaving \emph{two} useful rephasings against
+\emph{three} bond phases. The combination that survives is the sum around the loop,
+$\Phi = \phi_{12}+\phi_{23}+\phi_{31}$, which is gauge invariant and physically is the
+magnetic flux threading the ring. A dimer has two sites and one bond --- one usable
+rephasing, one phase --- so nothing survives. That is the whole difference between (b)
+and (c), and it is the Aharonov--Bohm effect in its smallest possible setting.
+\end{solution}
+
+% ---------------------------------------------------------------------------
+\begin{problem}{Ramsey interferometry}
+\label{prob:ramsey}
+Using the machinery of \cref{sec:driven}, simulate the following on a system with
+detuning $\Delta$: a $\pi/2$ pulse with phase $\varphi=0$; free evolution with the drive
+off (so $\dvec = \hbar\Delta\hat{z}$) for a time $\tau$; a second $\pi/2$ pulse, also
+with $\varphi=0$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=1pt]
+\item Plot the final $P_\beta$ against $\tau$. What is the oscillation frequency?
+\item Repeat with the second pulse phase-shifted to $\varphi=\pi$. What happens, and why
+does this demonstrate that the \emph{relative} phase of two pulses is physical even
+though the phase of one is not?
+\item This is the Ramsey separated-oscillatory-fields method, and it is how atomic clocks
+work. Why does a longer $\tau$ give a more precise frequency measurement?
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+Work in the hard-pulse limit $\omega_1\gg\Delta$, so the pulses are effectively
+instantaneous rotations and the detuning acts only during $\tau$.
+
+\textbf{(a)} The first $x$-pulse takes $\svec$ from the north pole to $-\hat{y}$
+(\cref{sec:driven}). Free evolution rotates it in the equatorial plane at rate $\Delta$,
+so $\svec(\tau) = (\sin\Delta\tau,\,-\cos\Delta\tau,\,0)$. The second $x$-pulse rotates
+about $\hat{x}$ by $\ang{90}$ in the same sense ($\hat{y}\to\hat{z}$), leaving
+$\svec = (\sin\Delta\tau,\,0,\,-\cos\Delta\tau)$. Hence
+\[
+P_\beta(\tau) = \frac{1-s_z}{2} = \frac{1+\cos\Delta\tau}{2},
+\]
+full-contrast fringes at the detuning frequency $\Delta$. (Numerically, with
+$\omega_1 = 400\Delta$, the simulation matches this to better than $0.003$.)
+
+\textbf{(b)} With $\varphi=\pi$ the second rotation is about $-\hat{x}$, so
+$\hat{y}\to-\hat{z}$ and the final $s_z$ changes sign:
+$P_\beta = \tfrac12(1-\cos\Delta\tau)$. The fringes are exactly inverted. Neither pulse
+phase is meaningful alone --- calling the first one ``$x$'' was a convention --- but the
+\emph{difference} of the two phases determines whether you measure a fringe maximum or a
+minimum at $\tau=0$. That is a measurable, convention-independent statement, and it is
+the concrete content of \cref{sec:sigmay}.
+
+\textbf{(c)} The fringe pattern $\cos\Delta\tau$ has period $2\pi/\tau$ in $\Delta$, so a
+frequency error $\delta\Delta$ produces a phase error $\delta\Delta\cdot\tau$. Doubling
+$\tau$ halves the detuning uncertainty for the same phase resolution: the precision
+improves as $1/\tau$. In practice $\tau$ is limited by decoherence, which is why
+buying a better clock means buying a longer coherence time.
+\end{solution}
+
+% ---------------------------------------------------------------------------
+\begin{problem}{The ammonia dipole paradox}
+\label{prob:nh3}
+At zero field the ground state of NH$_3$ is $\tfrac{1}{\sqrt2}(\ket{L}+\ket{R})$, which
+has \emph{zero} expectation value of the dipole operator --- yet NH$_3$ is tabulated with
+$\mu = \SI{1.47}{\debye}$.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=1pt]
+\item Compute $\Braket{\hat\mu}$ in each of the two zero-field eigenstates, taking
+$\hat\mu = \mu\,\szo$ in the $\{\ket{L},\ket{R}\}$ basis.
+\item A molecule prepared in $\ket{L}$ is not stationary. Using \cref{eq:bloch-eq}, find
+$\Braket{\hat\mu}(t)$ and its oscillation frequency.
+\item Reconcile (a) and (b) with the tabulated value. On what timescale must a
+measurement act to see $\SI{1.47}{\debye}$ rather than zero?
+\item Deuterating to ND$_3$ drops the inversion splitting to about
+\SI{0.053}{\wavenumber}. What happens to the crossover field
+$\mathcal{E}_{\rm cross}=\Delta_t/\mu$, and why is the splitting so sensitive to
+isotopic substitution?
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} With $\hat\mu = \mu\szo$ and eigenstates
+$\ket{\pm} = \tfrac{1}{\sqrt2}(\ket{L}\pm\ket{R})$,
+\[
+\Braket{\pm|\hat\mu|\pm} = \frac{\mu}{2}\big(\braket{L|\szo|L} + \braket{R|\szo|R}\big)
+ = \frac{\mu}{2}(1-1) = 0 .
+\]
+Both stationary states are exactly nonpolar. This is not an accident: they are parity
+eigenstates, and $\hat\mu$ is parity-odd, so its diagonal elements must vanish. The
+dipole operator is purely \emph{off}-diagonal in the energy eigenbasis --- which is
+precisely why the $\SI{23.786}{\giga\hertz}$ transition between them is dipole allowed
+and drives the maser.
+
+\textbf{(b)} $\ket{L} = \tfrac{1}{\sqrt2}(\ket{+}+\ket{-})$ has Bloch vector
+$\svec(0) = +\hat{z}$, while $\dvec = -2\Delta_t\hat{x}$. By \cref{eq:bloch-eq} the
+vector precesses in the $zy$ plane at $|\dvec|/\hbar = 2\Delta_t/\hbar$, so
+\[
+\Braket{\hat\mu}(t) = \mu\, s_z(t) = \mu\cos\!\left(\frac{2\Delta_t}{\hbar}t\right),
+\]
+oscillating at exactly the inversion frequency, \SI{23.786}{\giga\hertz}
+(period \SI{42}{\pico\second}).
+
+\textbf{(c)} Both are right; they answer different questions. A measurement slow
+compared with \SI{42}{\pico\second} averages \cref{eq:bloch-eq} over many inversions and
+returns zero. A measurement fast compared with it --- or any interaction that
+\emph{localizes} the molecule before it can invert --- sees the instantaneous
+\SI{1.47}{\debye}. In practice a bulk dielectric measurement reports
+$\mu=\SI{1.47}{\debye}$ because collisions in the gas, and the local fields of
+neighbouring molecules in a liquid, both act far faster than \SI{42}{\pico\second} and
+keep the molecule pinned on one side. \Cref{fig:nh3} is the quantitative version of that
+statement: a field of order $\mathcal{E}_{\rm cross}$ localizes the umbrella, and once
+localized the molecule has its full classical dipole. The ``paradox'' is really the
+statement that the tabulated dipole belongs to a \emph{localized} molecule, not to an
+energy eigenstate of an isolated one.
+
+\textbf{(d)} $\mathcal{E}_{\rm cross}$ is proportional to $\Delta_t$, so it falls by the
+same factor of roughly $15$: from \SI{16.07}{\kilo\volt\per\centi\meter} to about
+\SI{1.1}{\kilo\volt\per\centi\meter}. ND$_3$ is far easier to localize with a field.
+
+The sensitivity comes from the exponential dependence of a tunneling amplitude on the
+mass. In the WKB approximation
+$\Delta_t \sim \exp\!\left(-\hbar^{-1}\!\int\!\sqrt{2m[V(x)-E]}\,\dd x\right)$, so
+$\Delta_t$ falls roughly exponentially in $\sqrt{m}$. Deuterium is twice the mass of
+hydrogen, and although the relevant inversion coordinate involves the nitrogen moving
+against three hydrogens rather than a single H atom, the effective mass still increases
+enough to suppress the amplitude by more than an order of magnitude. This exponential
+mass sensitivity is the general signature of tunneling, and it is why kinetic isotope
+effects far larger than the classical $\sqrt{2}$ are taken as evidence that a reaction
+proceeds by tunneling.
+\end{solution}

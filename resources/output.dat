@@ -16,7 +16,7 @@ Scratch directory: /tmp/
     Solid Harmonics ordering:            Gaussian
 
 *** tstart() called on CHEM4VYDH4JALT
-*** at Tue Aug 25 20:03:09 2026
+*** at Tue Sep  1 14:34:16 2026
 
    => Loading Basis Set <=
 
@@ -198,14 +198,14 @@ Properties computed using the SCF density matrix
 
  ------------------------------------------------------------------------------------
 
-*** tstop() called on CHEM4VYDH4JALT at Tue Aug 25 20:03:09 2026
+*** tstop() called on CHEM4VYDH4JALT at Tue Sep  1 14:34:16 2026
 Module time:
 	user time   =       0.13 seconds =       0.00 minutes
-	system time =       0.02 seconds =       0.00 minutes
+	system time =       0.03 seconds =       0.00 minutes
 	total time  =          0 seconds =       0.00 minutes
 Total time:
 	user time   =       0.13 seconds =       0.00 minutes
-	system time =       0.02 seconds =       0.00 minutes
+	system time =       0.03 seconds =       0.00 minutes
 	total time  =          0 seconds =       0.00 minutes
   ==> One Electron Grid Properties (v2.0) <==
 
@@ -879,3 +879,4 @@ Total time:
     Spherical Harmonics?: true
     Max angular momentum: 2
 
+    SCF Energy............................................................................PASSED

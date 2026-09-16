@@ -1,0 +1,119 @@
+% ============================================================================
+\section{Every two-level Hamiltonian is a spin}
+\label{sec:formalism}
+% ============================================================================
+
+Chemistry supplies two-level systems in abundance. A bond in a minimal basis has two
+atomic orbitals; a proton in an NMR magnet has two spin projections; a donor--acceptor
+complex has the electron on one site or the other; ammonia has its umbrella up or down;
+a chromophore in a weak laser field has a ground and a first excited state. In each case
+the relevant Hilbert space is two dimensional, and in each case --- as we now show ---
+the Hamiltonian is a linear combination of the identity and the three Pauli matrices.
+
+\subsection{The Pauli matrices are a complete basis}
+
+Let $\ket{\alpha}$ and $\ket{\beta}$ be an orthonormal pair spanning the space. Which
+two physical states these are will change from section to section; the algebra will not.
+Any Hamiltonian is a $2\times2$ Hermitian matrix,
+%
+\begin{equation}
+\Hop =
+\begin{bmatrix}
+H_{\alpha\alpha} & H_{\alpha\beta}\\
+H_{\alpha\beta}^{*} & H_{\beta\beta}
+\end{bmatrix},
+\qquad H_{\alpha\alpha}, H_{\beta\beta}\in\mathbb{R},
+\label{eq:generalH}
+\end{equation}
+%
+which carries four real degrees of freedom: the two diagonal entries and the real and
+imaginary parts of $H_{\alpha\beta}$. The set $\{\Iop,\sxo,\syo,\szo\}$ carries four
+real degrees of freedom as well, and it is straightforward to check that these four
+matrices are linearly independent. They therefore span the space of Hermitian
+$2\times2$ matrices, and we may always write
+
+\begin{keyresult}[The Pauli decomposition]
+\vspace{-0.35cm}
+\begin{equation}
+\Hop \;=\; \varepsilon_0\,\Iop \;+\; \half\!\left(d_x\sxo + d_y\syo + d_z\szo\right)
+    \;\equiv\; \varepsilon_0\,\Iop + \half\,\dvec\cdot\pauliv ,
+\label{eq:pauli-decomp}
+\end{equation}
+with $\varepsilon_0$ and the three components of $\dvec$ all real.
+\end{keyresult}
+
+\noindent
+Writing \cref{eq:pauli-decomp} out in components,
+%
+\begin{equation}
+\Hop =
+\begin{bmatrix}
+\varepsilon_0 + \tfrac{d_z}{2} & \tfrac{d_x - \ii d_y}{2}\\[4pt]
+\tfrac{d_x + \ii d_y}{2} & \varepsilon_0 - \tfrac{d_z}{2}
+\end{bmatrix},
+\label{eq:pauli-components}
+\end{equation}
+%
+so that each piece can be read off and given a name.
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Component & Definition & Physical meaning \\
+\midrule
+$\varepsilon_0$ & $\half(H_{\alpha\alpha}+H_{\beta\beta})$
+  & mean energy; shifts everything, changes nothing \\
+$d_z$ & $H_{\alpha\alpha}-H_{\beta\beta}$
+  & \textbf{asymmetry}: the energy gap between the basis states \\
+$d_x$ & $2\,\mathrm{Re}\,H_{\alpha\beta}$
+  & \textbf{coupling}: the real part of the mixing element \\
+$d_y$ & $-2\,\mathrm{Im}\,H_{\alpha\beta}$
+  & \textbf{coupling}: the imaginary part \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+That table is the thesis of these notes. Everything that follows is an exercise in
+identifying, for some piece of chemistry, what plays the role of the asymmetry and what
+plays the role of the coupling.
+
+\subsection{Extracting the components}
+
+The Pauli matrices satisfy the two trace identities
+%
+\begin{equation}
+\Tr\!\left(\sxo\right)=\Tr\!\left(\syo\right)=\Tr\!\left(\szo\right)=0,
+\qquad
+\Tr\!\left(\hat\sigma_i\hat\sigma_j\right) = 2\,\delta_{ij},
+\label{eq:traces}
+\end{equation}
+%
+which follow immediately from the product rule
+$\hat\sigma_i\hat\sigma_j = \delta_{ij}\Iop + \ii\,\epsilon_{ijk}\hat\sigma_k$
+(derived in \cref{app:pauli}). Multiplying \cref{eq:pauli-decomp} by $\hat\sigma_i$ and
+tracing therefore isolates a single component:
+
+\begin{equation}
+\boxed{\;\varepsilon_0 = \half\Tr\!\left(\Hop\right),
+\qquad
+d_i = \Tr\!\left(\hat\sigma_i\,\Hop\right).\;}
+\label{eq:extract}
+\end{equation}
+
+\begin{nbbox}[In the notebook]
+\Cref{eq:extract} is the function \texttt{pauli\_decomposition(H)}, and
+\cref{eq:pauli-decomp} is \texttt{build\_two\_level(e0, dz, dx, dy)}. The notebook
+verifies that the two are exact inverses of one another on 500 randomly generated
+Hermitian matrices --- a much stronger check than any single worked example, because
+it tests completeness of the basis rather than one lucky case.
+\end{nbbox}
+
+\subsection{A first example: the spin operators themselves}
+
+As a sanity check, take the operators from Computational Set 1. Since
+$\Szo = \tfrac{\hbar}{2}\szo$, applying \cref{eq:extract} gives
+$\varepsilon_0=0$ and $\dvec = (0,0,\hbar)$. Similarly $\Sxo$ gives
+$\dvec=(\hbar,0,0)$ and $\Syo$ gives $\dvec=(0,\hbar,0)$. The three spin operators are
+simply the three coordinate axes of the $\dvec$ space, which is why that space is worth
+taking seriously as a geometric object --- the subject of the next section.

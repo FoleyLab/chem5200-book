@@ -1,0 +1,201 @@
+% ============================================================================
+\section{Example I: the two-orbital LCAO dimer}
+\label{sec:dimer}
+% ============================================================================
+
+The simplest molecular orbital problem in chemistry is two atoms carrying one atomic
+orbital each. Identify $\ket{A}\equiv\ket{\alpha}$ and $\ket{B}\equiv\ket{\beta}$.
+
+\begin{nbbox}[A word on orthogonality]
+Atomic orbitals on neighbouring atoms overlap, $\braket{A|B}=S\neq 0$, which strictly
+gives a generalized eigenvalue problem $\mathbf{Hc} = E\,\mathbf{Sc}$. Throughout this
+section we assume the basis has already been symmetrically (L\"owdin) orthogonalized,
+$\mathbf{S}^{-1/2}\mathbf{H}\mathbf{S}^{-1/2}$, so that $\mathbf{S}=\mathbf{1}$. This is
+exactly the assumption H\"uckel theory makes, and it is what lets us use the machinery
+of \cref{sec:geometry} unmodified. The general overlap case is taken up in the Basis
+Sets set.
+\end{nbbox}
+
+\subsection{Identifying $\dvec$}
+
+In the orthogonalized basis the matrix elements carry their traditional H\"uckel names,
+%
+\begin{equation}
+\Hop = \begin{bmatrix} \alpha_A & \beta \\ \beta & \alpha_B \end{bmatrix},
+\end{equation}
+%
+where $\alpha_X = \braket{X|\Hop|X}$ is the \emph{Coulomb integral} --- the energy of an
+electron localized in the orbital on atom $X$, more negative for a more electronegative
+atom --- and $\beta = \braket{A|\Hop|B}$ is the \emph{resonance} or \emph{hopping
+integral}, negative by convention and falling off roughly exponentially with
+internuclear separation. Applying \cref{eq:extract},
+
+\begin{keyresult}[LCAO dimer]
+\vspace{-0.35cm}
+\begin{equation}
+\varepsilon_0 = \frac{\alpha_A+\alpha_B}{2},
+\qquad
+d_z = \underbrace{\alpha_A-\alpha_B}_{\text{electronegativity difference}},
+\qquad
+d_x = \underbrace{2\beta}_{\text{twice the hopping}},
+\qquad
+d_y = 0 .
+\label{eq:dimer-d}
+\end{equation}
+\end{keyresult}
+
+\noindent
+The absence of $d_y$ is not an accident of this example; it is a consequence of
+time-reversal symmetry, taken up in \cref{sec:sigmay}.
+
+From \cref{eq:eigenvalues} the molecular orbital energies are
+%
+\begin{equation}
+E_{\pm} = \frac{\alpha_A+\alpha_B}{2} \pm \sqrt{\left(\frac{\alpha_A-\alpha_B}{2}\right)^{\!2} + \beta^2},
+\label{eq:dimer-E}
+\end{equation}
+%
+and the mixing angle is $\tan\theta = 2\beta/(\alpha_A-\alpha_B)$.
+
+\subsection{The two limits}
+
+\paragraph{Homonuclear: $d_z=0$.} For H$_2^+$, or for the $\pi$ system of ethylene,
+$\alpha_A=\alpha_B\equiv\alpha$ and the Hamiltonian is \emph{pure} $\sxo$. Then
+$\theta=\pi/2$, the eigenvectors are $\tfrac{1}{\sqrt2}(\ket{A}\pm\ket{B})$, and
+$E_\pm = \alpha \pm |\beta|$: a bonding orbital at $\alpha+\beta$ (recall $\beta<0$) and
+an antibonding orbital at $\alpha-\beta$, split by $2|\beta|$.
+
+It is worth noticing that this Hamiltonian is $\Sxo$ up to a scale and a shift. The
+bonding and antibonding MOs of a homonuclear diatomic are, as vectors, precisely the
+eigenvectors of $\Sxo$ you computed in Computational Set 1.
+
+\paragraph{Strongly heteronuclear: $|d_z| \gg |d_x|$.} Now $\theta\to 0$, the orbitals
+barely mix, and the doubly occupied lower MO sits almost entirely on the more
+electronegative atom. This is the ionic limit. Everything in between is a polar
+covalent bond, and the single dimensionless parameter controlling where you sit is
+%
+\begin{equation}
+\frac{|d_x|}{|d_z|} = \frac{2|\beta|}{|\alpha_A-\alpha_B|}.
+\label{eq:covalency}
+\end{equation}
+
+\begin{nbbox}[Mixed-valence chemistry]
+Ratio \eqref{eq:covalency} is the physical content of the \textbf{Robin--Day}
+classification of mixed-valence complexes \cite{RobinDay}. Class~I ($|\beta|\ll|d_z|/2$)
+means fully trapped valences and no intervalence band; Class~III
+($|\beta|\gg|d_z|/2$) means a completely delocalized, symmetric ion --- the
+Creutz--Taube complex
+$[(\mathrm{NH_3})_5\mathrm{Ru}\text{-pyrazine-}\mathrm{Ru(NH_3)_5}]^{5+}$
+being the canonical case \cite{CreutzTaube}. Class~II is the interesting middle, where
+the intervalence charge-transfer band appears and Marcus theory (\cref{sec:et})
+governs the thermal transfer rate.
+\end{nbbox}
+
+\subsection{A worked case}
+
+Take $\alpha_A = \SI{-11.4}{\electronvolt}$, $\alpha_B = \SI{-13.6}{\electronvolt}$
+(atom B the more electronegative), and $\beta = \SI{-2.7}{\electronvolt}$. Then
+$\varepsilon_0 = \SI{-12.5}{\electronvolt}$, $d_z = \SI{2.2}{\electronvolt}$, and
+$d_x = \SI{-5.4}{\electronvolt}$, so
+%
+\begin{equation}
+\dperp = |2\beta| = \SI{5.4}{\electronvolt},
+\qquad
+|\dvec| = \sqrt{2.2^2+5.4^2}\;\si{\electronvolt} = \SI{5.831}{\electronvolt},
+\end{equation}
+%
+and, since $d_x<0$ puts the transverse component along $-\hat{x}$,
+%
+\begin{equation}
+\theta = \atantwo(\dperp,\,d_z) = \atantwo(5.4,\,2.2) = \ang{67.83},
+\qquad
+\varphi = \pi .
+\end{equation}
+%
+The MOs come out at $\SI{-15.415}{\electronvolt}$ (bonding) and
+$\SI{-9.585}{\electronvolt}$ (antibonding). The bonding MO carries
+$\sin^2(\theta/2) = 0.311$ of its density on A and $0.689$ on B --- polarized toward the
+electronegative atom, as chemical intuition demands, but nowhere near the ionic limit
+because $2|\beta|$ is more than twice $|d_z|$.
+
+\Cref{fig:avoided} is exactly the picture of this system as $d_z$ is scanned at fixed
+$\beta$: a bond that is ionic at one extreme, purely covalent at $d_z=0$, and ionic with
+the opposite polarity at the other extreme.
+
+% ---------------------------------------------------------------------------
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,
+    lvl/.style={line width=1.2pt},
+    corr/.style={gray!55,line width=0.4pt},
+    lab/.style={font=\scriptsize},
+    elec/.style={-{Stealth[length=3.2pt]},black,line width=0.5pt}]
+
+  % ================= homonuclear =================
+  \begin{scope}[xshift=0cm]
+    \node[font=\small\bfseries] at (1.9,2.55) {Homonuclear: $d_z=0$};
+    % AO levels
+    \draw[cMuted,lvl] (0.0,0) -- (0.8,0);
+    \draw[cMuted,lvl] (3.0,0) -- (3.8,0);
+    \node[lab,anchor=south] at (0.4,0.10) {$\alpha$};
+    \node[lab,anchor=south] at (3.4,0.10) {$\alpha$};
+    % MO levels
+    \draw[cUpper,lvl] (1.5,1.15) -- (2.3,1.15);
+    \draw[cLower,lvl] (1.5,-1.15) -- (2.3,-1.15);
+    \node[lab,anchor=south] at (1.9,1.24) {$\alpha-\beta$ \; (antibonding)};
+    \node[lab,anchor=north] at (1.9,-1.55) {$\alpha+\beta$ \; (bonding)};
+    % correlation lines
+    \foreach \sx in {0.8,3.0} {
+      \draw[corr] (\sx,0) -- (1.9,1.15);
+      \draw[corr] (\sx,0) -- (1.9,-1.15);
+    }
+    % electron pair in the bonding MO
+    \draw[elec] (1.82,-1.35) -- (1.82,-0.95);
+    \draw[elec] (1.98,-0.95) -- (1.98,-1.35);
+    % splitting arrow, clear to the right of everything
+    \draw[<->,cAccent,line width=0.7pt] (4.55,-1.15) -- (4.55,1.15);
+    \node[cAccent,lab,anchor=west] at (4.65,0.0) {$2|\beta|$};
+    \node[lab,anchor=north,align=center] at (1.9,-2.10)
+      {$50/50$ on both atoms\\[-2pt]($\theta=\pi/2$)};
+  \end{scope}
+
+  % ================= heteronuclear =================
+  \begin{scope}[xshift=7.7cm]
+    \node[font=\small\bfseries] at (1.9,2.55) {Heteronuclear: $d_z\neq0$};
+    \draw[cMuted,lvl] (0.0,0.75) -- (0.8,0.75);
+    \draw[cMuted,lvl] (3.0,-0.75) -- (3.8,-0.75);
+    \node[lab,anchor=south] at (0.4,0.85) {$\alpha_A$};
+    \node[lab,anchor=south] at (3.4,-0.65) {$\alpha_B$};
+    \draw[cUpper,lvl] (1.5,1.55) -- (2.3,1.55);
+    \draw[cLower,lvl] (1.5,-1.55) -- (2.3,-1.55);
+    \draw[corr] (0.8,0.75) -- (1.9,1.55);
+    \draw[corr] (0.8,0.75) -- (1.9,-1.55);
+    \draw[corr] (3.0,-0.75) -- (1.9,1.55);
+    \draw[corr] (3.0,-0.75) -- (1.9,-1.55);
+    \draw[elec] (1.82,-1.75) -- (1.82,-1.35);
+    \draw[elec] (1.98,-1.35) -- (1.98,-1.75);
+    % d_z bracket between the two AO levels
+    \draw[<->,cMuted,line width=0.7pt] (4.05,-0.75) -- (4.05,0.75);
+    \node[cMuted,lab,anchor=west] at (4.12,0.0) {$d_z$};
+    \draw[<->,cAccent,line width=0.7pt] (4.85,-1.55) -- (4.85,1.55);
+    \node[cAccent,lab,anchor=west] at (4.95,0.0) {$|\dvec|$};
+    \node[lab,anchor=north,align=center] at (1.9,-1.95)
+      {$\sin^2\!\frac{\theta}{2}$ on A, $\cos^2\!\frac{\theta}{2}$ on B\\[-2pt]
+       (polarized toward B)};
+  \end{scope}
+\end{tikzpicture}
+\caption{Molecular orbital correlation diagrams for the two-orbital dimer (recall
+$\beta<0$, so $\alpha+\beta$ is the \emph{lower} level). The splitting is
+$|\dvec| = \sqrt{d_z^2+4\beta^2}$ in both cases; what changes is how the lower MO
+distributes itself between the atoms, which is governed entirely by the mixing angle
+$\theta$ of \cref{eq:mixing-angle}.}
+\label{fig:mo-diagram}
+\end{figure}
+% ---------------------------------------------------------------------------
+
+\begin{nbbox}[In the notebook]
+Part 3 of the notebook builds this Hamiltonian, decomposes it, reproduces the numbers
+above, and then scans $d_z$ to generate \cref{fig:avoided}. One of the test cells
+asserts that the gap never falls below $2|\beta|$ across the entire scan --- a numerical
+statement of the non-crossing rule, \cref{eq:noncrossing}.
+\end{nbbox}

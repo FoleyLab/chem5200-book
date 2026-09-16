@@ -1,0 +1,267 @@
+% ============================================================================
+\section{The Pauli algebra}
+\label{app:pauli}
+% ============================================================================
+
+Everything in \cref{sec:formalism,sec:geometry} rests on one product rule. Multiplying
+out the matrices directly,
+%
+\begin{equation}
+\sxo\syo = \ii\szo,\qquad \syo\szo = \ii\sxo,\qquad \szo\sxo = \ii\syo,
+\qquad
+\sxo^2=\syo^2=\szo^2=\Iop,
+\end{equation}
+%
+and each product in the first list reverses sign when the factors are exchanged. All of
+this is summarized by
+
+\begin{keyresult}[Pauli product rule]
+\vspace{-0.35cm}
+\begin{equation}
+\hat\sigma_i\hat\sigma_j = \delta_{ij}\Iop + \ii\,\epsilon_{ijk}\hat\sigma_k ,
+\label{eq:pauli-product}
+\end{equation}
+with $\epsilon_{ijk}$ the Levi-Civita symbol and a sum over $k$ implied.
+\end{keyresult}
+
+\noindent
+Taking the symmetric and antisymmetric parts of \cref{eq:pauli-product} gives the
+commutator and anticommutator separately,
+%
+\begin{equation}
+\left[\hat\sigma_i,\hat\sigma_j\right] = 2\ii\,\epsilon_{ijk}\hat\sigma_k,
+\qquad
+\left\{\hat\sigma_i,\hat\sigma_j\right\} = 2\delta_{ij}\Iop .
+\label{eq:pauli-comm}
+\end{equation}
+%
+The first of these, written for $\Sxo=\tfrac{\hbar}{2}\sxo$ and friends, is the angular
+momentum algebra $[\Sxo,\Syo]=\ii\hbar\Szo$ you verified numerically in Computational
+Set 1. The trace identities \eqref{eq:traces} follow by taking the trace of
+\cref{eq:pauli-product} and using $\Tr\hat\sigma_k=0$.
+
+\subsection*{Proof of $(\dvec\cdot\pauliv)^2 = |\dvec|^2\Iop$}
+
+Expand and apply \cref{eq:pauli-product}:
+%
+\begin{align}
+\left(\dvec\cdot\pauliv\right)^2
+ &= d_i d_j\,\hat\sigma_i\hat\sigma_j
+  = d_i d_j\left(\delta_{ij}\Iop + \ii\,\epsilon_{ijk}\hat\sigma_k\right) \nonumber\\
+ &= |\dvec|^2\,\Iop + \ii\,\epsilon_{ijk}\,d_i d_j\,\hat\sigma_k
+  = |\dvec|^2\,\Iop .
+\label{eq:dsq-proof}
+\end{align}
+%
+The second term vanishes because $\epsilon_{ijk}$ is antisymmetric in $i\leftrightarrow j$
+while $d_i d_j$ is symmetric, and the contraction of a symmetric with an antisymmetric
+tensor is zero. This is \cref{eq:dsquared}, and with it the eigenvalues
+\eqref{eq:eigenvalues} follow immediately: if $\hat{M}^2 = |\dvec|^2\Iop$ then every
+eigenvalue $m$ of $\hat{M}$ satisfies $m^2=|\dvec|^2$.
+
+% ============================================================================
+\section{The eigenvectors}
+\label{app:eigvec}
+% ============================================================================
+
+Take $\varepsilon_0=0$ without loss of generality and write $\Hop$ in terms of the polar
+angles of \cref{eq:mixing-angle}:
+%
+\begin{equation}
+\Hop = \frac{|\dvec|}{2}
+\begin{bmatrix}
+\cos\theta & \sin\theta\,e^{-\ii\varphi}\\
+\sin\theta\,e^{+\ii\varphi} & -\cos\theta
+\end{bmatrix}.
+\end{equation}
+%
+Try $\ket{+} = \big(\cos\tfrac{\theta}{2},\; e^{\ii\varphi}\sin\tfrac{\theta}{2}\big)^{T}$.
+The first component of $\Hop\ket{+}$ is
+%
+\begin{align}
+\frac{|\dvec|}{2}\left[\cos\theta\cos\tfrac{\theta}{2}
+ + \sin\theta\,e^{-\ii\varphi}e^{\ii\varphi}\sin\tfrac{\theta}{2}\right]
+&= \frac{|\dvec|}{2}\left[\cos\theta\cos\tfrac{\theta}{2} + \sin\theta\sin\tfrac{\theta}{2}\right] \nonumber\\
+&= \frac{|\dvec|}{2}\cos\!\left(\theta-\tfrac{\theta}{2}\right)
+ = \frac{|\dvec|}{2}\cos\tfrac{\theta}{2},
+\end{align}
+%
+using the cosine difference formula. The second component is, similarly,
+%
+\begin{equation}
+\frac{|\dvec|}{2}\,e^{\ii\varphi}\left[\sin\theta\cos\tfrac{\theta}{2} - \cos\theta\sin\tfrac{\theta}{2}\right]
+= \frac{|\dvec|}{2}\,e^{\ii\varphi}\sin\tfrac{\theta}{2}.
+\end{equation}
+%
+So $\Hop\ket{+} = \tfrac{|\dvec|}{2}\ket{+}$, confirming \cref{eq:eigenvectors} and
+$E_+ = \varepsilon_0 + |\dvec|/2$. The state $\ket{-}$ is obtained by
+$\theta\to\theta+\pi$, $\varphi\to\varphi+\pi$ (that is, $\dvec\to-\dvec$), which is why
+it appears with the opposite sign pattern.
+
+Two checks worth doing yourself: $\braket{+|-} = 0$, and
+$\braket{+|\szo|+} = \cos^2\tfrac{\theta}{2}-\sin^2\tfrac{\theta}{2} = \cos\theta$, which
+together with the analogous $x$ and $y$ expectation values confirms
+$\svec_+ = \dhat$ as asserted in \cref{sec:bloch}.
+
+% ============================================================================
+\section{The Bloch equation}
+\label{app:blocheq}
+% ============================================================================
+
+Start from the Heisenberg equation for the expectation value of $\hat\sigma_a$,
+%
+\begin{equation}
+\frac{\dd\Braket{\hat\sigma_a}}{\dd t}
+  = \frac{\ii}{\hbar}\Braket{\left[\Hop,\hat\sigma_a\right]}.
+\end{equation}
+%
+The identity part of $\Hop$ commutes with everything, so only
+$\half d_b\hat\sigma_b$ contributes:
+%
+\begin{equation}
+\left[\Hop,\hat\sigma_a\right]
+ = \half d_b\left[\hat\sigma_b,\hat\sigma_a\right]
+ = \half d_b\left(2\ii\,\epsilon_{bac}\hat\sigma_c\right)
+ = \ii\, d_b\,\epsilon_{bac}\,\hat\sigma_c ,
+\end{equation}
+%
+using \cref{eq:pauli-comm}. Therefore
+%
+\begin{equation}
+\frac{\dd\Braket{\hat\sigma_a}}{\dd t}
+ = \frac{\ii}{\hbar}\cdot \ii\,d_b\,\epsilon_{bac}\Braket{\hat\sigma_c}
+ = -\frac{1}{\hbar}\,\epsilon_{bac}\,d_b\Braket{\hat\sigma_c}
+ = +\frac{1}{\hbar}\,\epsilon_{abc}\,d_b\Braket{\hat\sigma_c},
+\end{equation}
+%
+where the last step used $\epsilon_{bac} = -\epsilon_{abc}$. The right-hand side is
+precisely the $a$-component of a cross product,
+$\left(\dvec\times\svec\right)_a = \epsilon_{abc}d_b s_c$, giving \cref{eq:bloch-eq}:
+%
+\begin{equation}
+\frac{\dd\svec}{\dd t} = \frac{1}{\hbar}\,\dvec\times\svec .
+\end{equation}
+
+\noindent
+\textbf{Remark.} For a real spin in a real magnetic field, $\dvec = -\gamma\hbar\mathbf{B}$
+and this becomes $\dot{\svec} = -\gamma\,\mathbf{B}\times\svec$ --- the classical
+equation for a magnetic moment precessing in a field, and the reason the same picture
+works for a classical gyroscope. That a fully quantum two-level system obeys a
+\emph{closed, classical-looking} equation of motion is special to two dimensions: the
+Bloch vector contains all the information in the state, so no higher moments are needed
+to close the hierarchy.
+
+% ============================================================================
+\section{The rotating-frame transformation}
+\label{app:rotframe}
+% ============================================================================
+
+Let $\Ry(t) = e^{+\ii\omega t\szo/2}$ and $\ket{\tilde\psi} = \Ry\ket{\psi}$. Then
+%
+\begin{align}
+\ii\hbar\frac{\dd\ket{\tilde\psi}}{\dd t}
+ &= \ii\hbar\dot{\Ry}\ket{\psi} + \Ry\left(\ii\hbar\frac{\dd\ket{\psi}}{\dd t}\right)
+  = \ii\hbar\left(\frac{\ii\omega}{2}\szo\right)\Ry\ket{\psi} + \Ry\Hop\ket{\psi} \nonumber\\
+ &= \left[\Ry\Hop\Ry^{\dagger} - \frac{\hbar\omega}{2}\szo\right]\ket{\tilde\psi}
+  \;\equiv\; \Hop_{\rm rot}\ket{\tilde\psi}.
+\label{eq:rotframe-def}
+\end{align}
+%
+So we need $\Ry\Hop\Ry^\dagger$. Since $\Ry$ is built from $\szo$, the $\szo$ term passes
+through untouched. For the transverse operators, define
+$\hat{A}(\vartheta) = e^{\ii\vartheta\szo/2}\,\sxo\,e^{-\ii\vartheta\szo/2}$ and
+differentiate:
+%
+\begin{equation}
+\frac{\dd\hat{A}}{\dd\vartheta} = \frac{\ii}{2}\left[\szo,\hat{A}\right],
+\qquad
+\left.\frac{\dd\hat{A}}{\dd\vartheta}\right|_{0} = \frac{\ii}{2}\left(2\ii\syo\right) = -\syo .
+\end{equation}
+%
+The analogous calculation for $\hat{B}(\vartheta)$ built from $\syo$ gives
+$\hat{B}'(0) = +\sxo$, so the pair satisfies $\hat{A}'=-\hat{B}$, $\hat{B}'=+\hat{A}$ and
+%
+\begin{equation}
+\Ry\,\sxo\,\Ry^{\dagger} = \sxo\cos\omega t - \syo\sin\omega t,
+\qquad
+\Ry\,\syo\,\Ry^{\dagger} = \syo\cos\omega t + \sxo\sin\omega t.
+\label{eq:rot-transverse}
+\end{equation}
+%
+Now substitute \cref{eq:rot-transverse} into the drive term of \cref{eq:lab-frame}. Write
+$c=\cos(\omega t+\varphi)$, $s=\sin(\omega t+\varphi)$, $C=\cos\omega t$,
+$S=\sin\omega t$:
+%
+\begin{align}
+\frac{\hbar\omega_1}{2}\Big[c\left(\sxo C - \syo S\right) + s\left(\syo C + \sxo S\right)\Big]
+&= \frac{\hbar\omega_1}{2}\Big[\sxo\left(cC+sS\right) + \syo\left(sC-cS\right)\Big] \nonumber\\
+&= \frac{\hbar\omega_1}{2}\Big[\sxo\cos\varphi + \syo\sin\varphi\Big],
+\end{align}
+%
+where the two brackets collapsed by the cosine and sine difference formulas evaluated at
+$(\omega t+\varphi)-\omega t = \varphi$. \textbf{All the time dependence has cancelled.}
+Combining with the $\szo$ terms from \cref{eq:rotframe-def},
+%
+\begin{equation}
+\Hop_{\rm rot} = \frac{\hbar\omega_0}{2}\szo - \frac{\hbar\omega}{2}\szo
+ + \frac{\hbar\omega_1}{2}\left(\cos\varphi\,\sxo+\sin\varphi\,\syo\right),
+\end{equation}
+%
+which is \cref{eq:rotframe}.
+
+\noindent
+\textbf{What was given up.} Nothing was approximated --- for a genuinely
+\emph{circularly} rotating drive this transformation is exact. (For a linearly polarized
+drive, $\propto\cos\omega t\,\sxo$, one first decomposes into two counter-rotating
+components and discards the far-off-resonant one; that discard is the rotating-wave
+approximation, and it is a genuine approximation.) What is lost is directness of
+interpretation: $\ket{\tilde\psi}$ is not the physical state, and a stationary Bloch
+vector in the rotating frame corresponds to one spinning at $\omega$ in the laboratory.
+
+% ============================================================================
+\section{The Marcus barrier}
+\label{app:marcus}
+% ============================================================================
+
+From \cref{eq:diabats} with $\lambda = 2kq_0^2$, the diabats cross where
+$V_D(q^\ddagger)=V_A(q^\ddagger)$:
+%
+\begin{equation}
+\half k(q+q_0)^2 = \half k(q-q_0)^2 + \Delta G^\circ
+\;\Longrightarrow\;
+2kq_0 q = \Delta G^\circ
+\;\Longrightarrow\;
+q^{\ddagger} = \frac{\Delta G^\circ}{2kq_0} = \frac{\Delta G^\circ q_0}{\lambda}.
+\end{equation}
+%
+The activation energy is the diabatic energy there, measured from the donor minimum at
+$q=-q_0$ where $V_D=0$:
+%
+\begin{align}
+\Delta G^{\ddagger} = V_D(q^{\ddagger})
+ &= \half k\left(\frac{\Delta G^\circ q_0}{\lambda} + q_0\right)^{\!2}
+  = \half k q_0^2\left(\frac{\Delta G^\circ+\lambda}{\lambda}\right)^{\!2} \nonumber\\
+ &= \frac{\lambda}{4}\cdot\frac{(\lambda+\Delta G^\circ)^2}{\lambda^2}
+  = \frac{(\lambda+\Delta G^{\circ})^2}{4\lambda},
+\end{align}
+%
+using $\half k q_0^2 = \lambda/4$. This is \cref{eq:marcus-barrier}. Three limits are
+worth memorizing:
+%
+\begin{equation}
+\Delta G^\circ = 0 \;\Rightarrow\; \Delta G^\ddagger = \frac{\lambda}{4},
+\qquad
+\Delta G^\circ = -\lambda \;\Rightarrow\; \Delta G^\ddagger = 0,
+\qquad
+\Delta G^\circ = -2\lambda \;\Rightarrow\; \Delta G^\ddagger = \frac{\lambda}{4}.
+\end{equation}
+%
+The barrier is symmetric about $\Delta G^\circ=-\lambda$: a reaction that is
+\emph{too} exergonic by exactly $\lambda$ is as slow as one with no driving force at all.
+
+Note finally that this is the barrier on the \emph{diabatic} surface. The true barrier on
+the lower adiabatic surface is lower by roughly $V_{DA}$ near the crossing. When
+$V_{DA}\ll k_BT$ the nonadiabatic (golden-rule) rate applies and the diabatic barrier is
+the right one to use; when $V_{DA}\gg k_BT$ the reaction is adiabatic and the transition
+state is the top of $E_-(q)$. The dimensionless ratio that decides which regime you are
+in is essentially the Landau--Zener exponent of \cref{eq:lz}.

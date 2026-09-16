@@ -1,0 +1,88 @@
+% ============================================================================
+\section{Summary}
+\label{sec:summary}
+% ============================================================================
+
+Every system in these notes is the same equation,
+$\Hop = \varepsilon_0\Iop + \half\dvec\cdot\pauliv$. Only the dictionary changes.
+
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}p{2.55cm}p{2.75cm}p{3.1cm}p{2.5cm}p{2.9cm}@{}}
+\toprule
+\textbf{System} & $\ket{\alpha},\ket{\beta}$ & $d_z$ (asymmetry) & $d_x,d_y$ (coupling)
+  & $|\dvec|$ is called \\
+\midrule
+LCAO dimer\newline(\cref{sec:dimer})
+  & AO on atom A / atom B
+  & $\alpha_A-\alpha_B$\newline (electronegativity)
+  & $2\beta$\newline (resonance integral)
+  & bonding--antibonding gap \\[4pt]
+Driven spin\newline(\cref{sec:driven})
+  & spin up / down
+  & $\hbar(\omega_0-\omega)$\newline (detuning)
+  & $\hbar\omega_1 e^{\pm\ii\varphi}$\newline (drive $\times$ phase)
+  & $\hbar\Omega$, generalized Rabi \\[4pt]
+Electron transfer\newline(\cref{sec:et})
+  & charge on D / on A
+  & $(\lambda/q_0)q-\Delta G^\circ$\newline \emph{(nuclear coordinate!)}
+  & $2V_{DA}$\newline (electronic coupling)
+  & adiabatic gap \\[4pt]
+NH$_3$ inversion\newline(\cref{sec:ammonia})
+  & umbrella down / up
+  & $2\mu\mathcal{E}$\newline (Stark field)
+  & $-2\Delta_t$\newline (tunneling)
+  & inversion doublet \\
+\bottomrule
+\end{tabular}
+\caption{One Hamiltonian, four molecules.}
+\label{tab:dictionary}
+\end{table}
+
+\noindent
+And the physics is always the same three statements:
+
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+\item \textbf{Splitting.} $E_\pm = \varepsilon_0 \pm \half|\dvec|$. Because $d_z$ and
+$\dperp$ add in quadrature, coupled levels never cross; the closest they come is
+$\dperp$.
+\item \textbf{Mixing.} $\tan\theta = \dperp/d_z$ decides whether the eigenstates are
+localized on the basis states or delocalized between them. The switch happens over a
+window of width $\sim\dperp$.
+\item \textbf{Dynamics.} $\dot{\svec} = \hbar^{-1}\dvec\times\svec$. The state precesses
+about $\dvec$ at the Bohr frequency $|\dvec|/\hbar$.
+\end{enumerate}
+
+\noindent
+Faced with a new two-level problem --- an exciton dimer, a superconducting qubit, a
+Kramers doublet, a curve crossing in a photochemical reaction --- the first move is
+always to find $\dvec$.
+
+\subsection*{What comes next}
+
+Both models flagged along the way live in a \emph{larger} Hilbert space: spin
+$\otimes$ boson, not spin alone. That tensor product is the step these notes deliberately
+do not take.
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Model & Coupling term & Its single-spin ancestor \\
+\midrule
+Jaynes--Cummings, \cref{eq:jc}
+  & $\hbar g(\hat{a}\hat\sigma_+ + \hat{a}^\dagger\hat\sigma_-)$
+  & \cref{sec:driven}, field as a classical number \\
+Holstein, \cref{eq:holstein}
+  & $\hbar\omega g(\hat{a}+\hat{a}^\dagger)\szo$
+  & \cref{sec:et}, $q$ as a classical parameter \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+In both cases the two-level machinery developed here survives intact --- it is simply
+tensored with a harmonic oscillator. Keep the results boxed in
+\cref{sec:formalism,sec:geometry}; you will need every one of them again.

@@ -1,0 +1,73 @@
+% ============================================================================
+%  CHEM 5200: Computational Chemistry
+%  Companion notes for Computational Set 2 -- Two-Level Electronic Systems
+%
+%  Compile with pdfLaTeX (twice, for cross-references).
+%  On Overleaf: Menu -> Compiler -> pdfLaTeX.
+%
+%  To produce the STUDENT version (problems without solutions), change
+%  \solutionstrue to \solutionsfalse in the line below.
+% ============================================================================
+\documentclass[11pt]{article}
+\usepackage{preamble}
+
+\solutionstrue      % <-- \solutionsfalse for the student handout
+
+\title{\vspace{-1.2cm}\Large\bfseries Two-Level Electronic Systems\\[2pt]
+       \large\normalfont Companion notes to Computational Set 2}
+\author{\normalsize Jay Foley\\[-2pt]
+        \small Department of Chemistry, University of North Carolina Charlotte}
+\date{\small CHEM 5200 \textperiodcentered\ Computational Chemistry}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\begin{abstract}
+\noindent
+\small
+In Computational Set 1 we developed the formalism of spin~$1/2$: the Pauli matrices,
+their eigenvectors, and their commutation relations. Nothing in that development
+required the system to be a spin. These notes make the general statement precise ---
+\emph{every} quantum system with two relevant states is governed by the same algebra ---
+and then apply it to four concrete chemical problems: the two-orbital LCAO dimer, a
+spin or chromophore driven by an oscillating field, donor--acceptor electron transfer
+along a nuclear coordinate, and the ammonia inversion doublet in a static electric
+field. In each case a $\szo$ term measures the energy asymmetry between the two basis
+states and a $\sxo$ (or $\syo$) term measures the coupling between them. We close by
+asking where a genuine $\syo$ contribution can come from, and by identifying the two
+models --- Jaynes--Cummings and Holstein --- that these examples become once a boson
+mode is added.
+\end{abstract}
+
+\vspace{-0.3cm}
+\begin{nbbox}[How to use these notes]
+These notes are the analytical companion to the Jupyter notebook
+\texttt{notebooks/two\_level\_systems.ipynb}. The notebook builds the same results
+numerically and asks you to write the code; the notes carry the derivations that
+are only sketched there. Read \cref{sec:formalism,sec:geometry} before starting the
+notebook, and use the appendices whenever a step in the main text is quoted
+rather than shown. The problems in \cref{sec:problems} are the same ones that close
+the notebook.
+\end{nbbox}
+
+\vspace{0.2cm}
+{\small\tableofcontents}
+\clearpage
+
+\input{sections/01-formalism}
+\input{sections/02-geometry}
+\input{sections/03-dimer}
+\input{sections/04-driven}
+\input{sections/05-electron-transfer}
+\input{sections/06-ammonia}
+\input{sections/07-sigmay}
+\input{sections/08-summary}
+\input{sections/09-problems}
+
+\appendix
+\input{sections/10-appendix}
+
+\input{sections/11-references}
+
+\end{document}

@@ -1,0 +1,138 @@
+% ============================================================================
+\section{Example IV: the ammonia inversion doublet}
+\label{sec:ammonia}
+% ============================================================================
+
+The three examples so far built their two-level space from two places an electron can
+be. This one builds it from two \emph{shapes the same molecule can have}.
+
+\subsection{Tunneling as an off-diagonal matrix element}
+
+Ammonia is pyramidal, and the nitrogen can pass through the plane of the three hydrogens
+like an umbrella turning inside out. Label the two pyramidal geometries $\ket{L}$
+(umbrella down) and $\ket{R}$ (umbrella up). Classically they are separated by a barrier
+of roughly \SI{2000}{\wavenumber} and the molecule would be stuck in one of them.
+Quantum mechanically the nitrogen \textbf{tunnels}, and tunneling is nothing other than
+an off-diagonal matrix element:
+%
+\begin{equation}
+\Hop = \begin{bmatrix} 0 & -\Delta_t \\ -\Delta_t & 0\end{bmatrix} = -\Delta_t\,\sxo .
+\label{eq:nh3-bare}
+\end{equation}
+%
+Pure $\sxo$. The eigenstates are $\tfrac{1}{\sqrt2}(\ket{L}\pm\ket{R})$, split by
+$2\Delta_t$: the \textbf{inversion doublet}, measured at
+%
+\begin{equation}
+2\Delta_t = \SI{0.7934}{\wavenumber} = \SI{23.786}{\giga\hertz},
+\end{equation}
+%
+a microwave transition --- the line Gordon, Zeiger and Townes used to build the first
+\textbf{maser} in 1954, three years before the laser \cite{Townes1955}.
+
+The conceptual point is worth dwelling on. The energy eigenstates of ammonia are
+\emph{not} the pyramidal geometries; they are delocalized over both. A molecule prepared
+as $\ket{L}$ is a superposition of the two eigenstates, so by \cref{sec:bloch} it
+oscillates: the umbrella flips back and forth at \SI{23.786}{\giga\hertz}.
+
+\subsection{Adding a $\szo$ term: the Stark effect}
+
+Switch on a static electric field $\mathcal{E}$ along the molecular axis. The two
+pyramidal geometries have dipole moments pointing in \emph{opposite} directions, so the
+field stabilizes one and destabilizes the other:
+
+\begin{keyresult}[Ammonia in a field]
+\vspace{-0.35cm}
+\begin{equation}
+\Hop = \mu\mathcal{E}\,\szo - \Delta_t\,\sxo
+\qquad\Longrightarrow\qquad
+d_z = 2\mu\mathcal{E}, \quad d_x = -2\Delta_t ,
+\label{eq:nh3-stark}
+\end{equation}
+with $\mu = \SI{1.47}{\debye}$ the NH$_3$ dipole moment.
+\end{keyresult}
+
+\noindent
+Structurally this is \cref{eq:dimer-d} again --- but now \emph{you} control $d_z$ with a
+knob on the bench. The gap is
+%
+\begin{equation}
+E_+-E_- = \sqrt{(2\mu\mathcal{E})^2+(2\Delta_t)^2},
+\end{equation}
+%
+quadratic in $\mathcal{E}$ at low field (a second-order Stark effect) and crossing over
+to linear at high field. The crossover occurs where the two terms are comparable,
+$\mu\mathcal{E}=\Delta_t$, that is at
+%
+\begin{equation}
+\mathcal{E}_{\rm cross} = \frac{\Delta_t}{\mu} = \SI{16.07}{\kilo\volt\per\centi\meter},
+\end{equation}
+%
+at which point the gap has grown by exactly $\sqrt{2}$. Turn the field well past this
+and $\theta\to0$: the field literally traps the umbrella on one side, converting a
+delocalized molecule into a localized one. \Cref{fig:nh3} shows both halves.
+
+% ---------------------------------------------------------------------------
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=2 by 1, horizontal sep=1.6cm},
+  notestyle, height=6.0cm,
+  xmin=0, xmax=60,
+]
+\nextgroupplot[
+  xlabel={electric field $\mathcal{E}$ (kV\,cm$^{-1}$)},
+  ylabel={energy (cm$^{-1}$)},
+  title={Stark effect on the doublet},
+  ymin=-1.7, ymax=1.7,
+  legend style={at={(0.03,0.97)},anchor=north west,draw=none,fill=white,
+                fill opacity=0.85,text opacity=1,font=\footnotesize},
+  legend cell align=left,
+]
+% mu = 0.024685 cm^-1 per kV/cm ; Delta_t = 0.3967 cm^-1
+\addplot[cUpper, very thick, domain=0:60, samples=200]
+  {sqrt((0.024685*x)^2 + 0.3967^2)};
+\addlegendentry{upper level}
+\addplot[cLower, very thick, domain=0:60, samples=200]
+  {-sqrt((0.024685*x)^2 + 0.3967^2)};
+\addlegendentry{lower level}
+\addplot[cMuted, dashed, thin, domain=0:60, samples=2]{0.024685*x};
+\addlegendentry{$\pm\mu\mathcal{E}$ (no tunneling)}
+\addplot[cMuted, dashed, thin, domain=0:60, samples=2]{-0.024685*x};
+\draw[cMuted,densely dotted,thin] (axis cs:16.07,-1.7) -- (axis cs:16.07,1.7);
+\draw[<->,cAccent,thick] (axis cs:2.6,-0.3967) -- (axis cs:2.6,0.3967);
+\node[cAccent,font=\footnotesize,anchor=west] at (axis cs:3.2,0.72){$2\Delta_t$};
+
+\nextgroupplot[
+  xlabel={electric field $\mathcal{E}$ (kV\,cm$^{-1}$)},
+  ylabel={$|\Braket{\szo}|$ of the lower state},
+  title={The field traps the umbrella},
+  ymin=-0.03, ymax=1.03,
+]
+\addplot[cAccent, very thick, domain=0:60, samples=300]
+  {abs(0.024685*x)/sqrt((0.024685*x)^2 + 0.3967^2)};
+\draw[cMuted,densely dotted,thin] (axis cs:16.07,-0.03) -- (axis cs:16.07,1.03);
+\node[cMuted,font=\footnotesize,anchor=west] at (axis cs:17.5,0.20)
+  {$\mu\mathcal{E}=\Delta_t$};
+\node[font=\footnotesize,anchor=west,align=left] at (axis cs:1.5,0.86)
+  {delocalized $\rightarrow$ localized};
+\end{groupplot}
+\end{tikzpicture}
+\caption{Ammonia in a static electric field, from \cref{eq:nh3-stark}. \textbf{Left:}
+the levels start split by the tunneling doublet $2\Delta_t = \SI{0.7934}{\wavenumber}$
+and approach the classical Stark asymptotes $\pm\mu\mathcal{E}$ at high field.
+\textbf{Right:} the localization $|\Braket{\szo}| = |d_z|/|\dvec| = |\cos\theta|$ of the
+lower state, running from $0$ (equal amplitude on both umbrella geometries) to $1$
+(trapped on one side).}
+\label{fig:nh3}
+\end{figure}
+% ---------------------------------------------------------------------------
+
+\begin{nbbox}[A puzzle worth posing to yourself]
+At zero field the ground state is $\tfrac{1}{\sqrt2}(\ket{L}+\ket{R})$, which has
+\emph{zero} dipole moment --- yet NH$_3$ is a famously polar molecule with
+$\mu=\SI{1.47}{\debye}$. Both statements are true. The resolution turns on what a
+dipole-moment measurement actually averages over, and on what timescale; see
+Problem~\ref{prob:nh3} in \cref{sec:problems}.
+\end{nbbox}

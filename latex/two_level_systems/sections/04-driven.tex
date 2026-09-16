@@ -1,0 +1,213 @@
+% ============================================================================
+\section{Example II: a driven two-level system}
+\label{sec:driven}
+% ============================================================================
+
+\subsection{The lab-frame Hamiltonian}
+
+A spin-$1/2$ nucleus in a static field $B_0\hat{z}$ has the Zeeman Hamiltonian
+%
+\begin{equation}
+\Hop_0 = -\gamma B_0 \Szo = \frac{\hbar\omega_0}{2}\szo,
+\qquad \omega_0 \equiv -\gamma B_0 ,
+\end{equation}
+%
+pure $\szo$, with the two spin states split by the Larmor energy $\hbar\omega_0$. For a
+proton at \SI{11.7}{\tesla} this is \SI{500}{\mega\hertz}, the number printed on the
+front of the spectrometer. Nothing happens under $\Hop_0$ alone: $\ket{\alpha}$ and
+$\ket{\beta}$ are eigenstates and the Bloch vector merely spins about $\hat{z}$.
+
+To make something happen, add a weak field rotating in the $xy$ plane at frequency
+$\omega$ --- the RF coil in NMR, or, for an electronic transition in the dipole
+approximation, the optical field of a laser:
+%
+\begin{equation}
+\Hop(t) = \frac{\hbar\omega_0}{2}\szo
+  + \frac{\hbar\omega_1}{2}\Big[\cos(\omega t+\varphi)\,\sxo + \sin(\omega t+\varphi)\,\syo\Big],
+\qquad \omega_1 \equiv -\gamma B_1 .
+\label{eq:lab-frame}
+\end{equation}
+%
+This is genuinely time dependent, so the machinery of \cref{sec:geometry} does not apply
+directly. One transformation fixes that.
+
+\subsection{The rotating frame}
+
+Move to a frame rotating about $z$ at the drive frequency by defining
+$\ket{\tilde\psi} = \Ry(t)\ket{\psi}$ with $\Ry(t) = e^{+\ii\omega t\szo/2}$. Substituting
+into the Schr\"odinger equation (worked out step by step in \cref{app:rotframe}) gives
+an effective Hamiltonian $\tilde{H} = \Ry\Hop\Ry^\dagger - \tfrac{\hbar\omega}{2}\szo$
+which turns out to be \emph{time independent}:
+
+\begin{keyresult}[Rotating-frame Hamiltonian]
+\vspace{-0.35cm}
+\begin{equation}
+\Hop_{\rm rot} = \frac{\hbar}{2}\Big[\underbrace{(\omega_0-\omega)}_{\textstyle \Delta}\,\szo
+   + \omega_1\big(\cos\varphi\,\sxo + \sin\varphi\,\syo\big)\Big],
+\label{eq:rotframe}
+\end{equation}
+that is, $d_z = \hbar\Delta$, $d_x = \hbar\omega_1\cos\varphi$,
+$d_y = \hbar\omega_1\sin\varphi$.
+\end{keyresult}
+
+\noindent
+Three features of \cref{eq:rotframe} are each a piece of real spectroscopic practice.
+
+\begin{itemize}[leftmargin=*,itemsep=3pt]
+\item \textbf{The detuning is the $\szo$ knob.} On resonance ($\omega=\omega_0$) it
+vanishes and $\dvec$ lies flat in the equatorial plane. Off resonance, $\dvec$ tilts
+toward the poles --- and by \cref{fig:bloch-prec}, a tilted $\dvec$ means the state can
+no longer reach the far pole.
+
+\item \textbf{The pulse phase is the $\syo$ knob.} Setting $\varphi=0$ gives a pure
+$\sxo$ term, an ``$x$-pulse''; $\varphi=\pi/2$ gives a pure $\syo$ term, a ``$y$-pulse''.
+This is not jargon: $\varphi$ is literally the phase of the RF pulse, and it is why every
+pulse-sequence diagram in an NMR textbook labels its pulses $x$, $y$, $-x$, $-y$.
+
+\item \textbf{The tilted-cone geometry of \cref{sec:bloch} is now physical.} The polar
+angle of $\dvec$ is set by how far off resonance you are, and its azimuth by the pulse
+phase.
+\end{itemize}
+
+\subsection{Rabi oscillations}
+
+Apply \cref{eq:eigenvalues}. The splitting in the rotating frame defines the
+\textbf{generalized Rabi frequency}
+%
+\begin{equation}
+\Omega = \frac{|\dvec|}{\hbar} = \sqrt{\Delta^2+\omega_1^2},
+\label{eq:rabi-freq}
+\end{equation}
+%
+and integrating \cref{eq:bloch-eq} from $\svec(0)=\hat{z}$ (or equivalently applying
+\cref{eq:eigenvectors} twice) gives
+
+\begin{keyresult}[Rabi formula]
+\vspace{-0.35cm}
+\begin{equation}
+P_\beta(t) = \frac{\omega_1^2}{\Omega^2}\,\sin^2\!\left(\frac{\Omega t}{2}\right).
+\label{eq:rabi}
+\end{equation}
+\end{keyresult}
+
+\noindent
+\Cref{eq:rabi} repays careful reading. The \emph{rate} of oscillation,
+$\Omega=\sqrt{\Delta^2+\omega_1^2}$, always \emph{increases} with detuning. But the
+\emph{amplitude},
+%
+\begin{equation}
+P_\beta^{\max} = \frac{\omega_1^2}{\Delta^2+\omega_1^2},
+\label{eq:lorentzian}
+\end{equation}
+%
+is a Lorentzian in $\Delta$ of half-width $\omega_1$: complete population inversion is
+possible only exactly on resonance. \Cref{eq:lorentzian} is simultaneously the origin of
+the spectroscopic lineshape and of \emph{pulse selectivity} --- a weak, long pulse
+addresses a narrow band of frequencies; a strong, short pulse excites everything in
+sight. \Cref{fig:rabi} shows both effects.
+
+% ---------------------------------------------------------------------------
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=2 by 1, horizontal sep=1.5cm},
+  notestyle, height=6.0cm,
+]
+\nextgroupplot[
+  xlabel={$\omega_1 t$}, ylabel={$P_\beta(t)$},
+  title={Rabi oscillations},
+  xmin=0, xmax=12.566, ymin=-0.03, ymax=1.05,
+  xtick={0,3.1416,6.2832,9.4248,12.566},
+  xticklabels={$0$,$\pi$,$2\pi$,$3\pi$,$4\pi$},
+  legend style={at={(0.5,-0.30)},anchor=north,legend columns=4,draw=none,fill=none,
+                font=\footnotesize},
+  legend cell align=left,
+]
+\addplot[cLower, very thick, domain=0:12.566, samples=400]
+  {(1/1)*sin(deg(sqrt(1)*x/2))^2};                       \addlegendentry{$\Delta=0$}
+\addplot[cAccent, very thick, domain=0:12.566, samples=400]
+  {(1/2)*sin(deg(sqrt(2)*x/2))^2};                       \addlegendentry{$\Delta=\omega_1$}
+\addplot[cWarm, very thick, domain=0:12.566, samples=500]
+  {(1/5)*sin(deg(sqrt(5)*x/2))^2};                       \addlegendentry{$\Delta=2\omega_1$}
+\addplot[cUpper, very thick, domain=0:12.566, samples=600]
+  {(1/17)*sin(deg(sqrt(17)*x/2))^2};                     \addlegendentry{$\Delta=4\omega_1$}
+
+\nextgroupplot[
+  xlabel={detuning $\Delta/\omega_1$}, ylabel={$P_\beta^{\max}$},
+  title={\ldots but only on resonance is inversion complete},
+  xmin=-5, xmax=5, ymin=-0.03, ymax=1.06,
+]
+\addplot[cUpper, very thick, domain=-5:5, samples=300]{1/(1+x^2)};
+\addplot[cMuted, dotted, thin, domain=-5:5, samples=2]{0.5};
+\draw[<->,cAccent,thin] (axis cs:-1,0.5) -- (axis cs:1,0.5);
+\node[cAccent,font=\footnotesize,anchor=south] at (axis cs:0,0.53){FWHM $=2\omega_1$};
+\end{groupplot}
+\end{tikzpicture}
+\caption{\textbf{Left:} \cref{eq:rabi} at four detunings. Detuning makes the
+oscillation \emph{faster} and \emph{shallower} at the same time. \textbf{Right:} the
+maximum transferable population, \cref{eq:lorentzian}. A pulse of Rabi strength
+$\omega_1$ can only fully invert spins within roughly $\pm\omega_1$ of resonance ---
+which is what ``selective pulse'' means.}
+\label{fig:rabi}
+\end{figure}
+% ---------------------------------------------------------------------------
+
+\subsection{$\pi$ and $\pi/2$ pulses}
+
+On resonance $\dvec$ lies in the equatorial plane, the precession cone opens into a
+great circle through both poles, and the state sweeps from $\ket{\alpha}$ to
+$\ket{\beta}$ and back. Two durations matter:
+%
+\begin{equation}
+t_\pi = \frac{\pi}{\omega_1}: \;\; \ket{\alpha}\to\ket{\beta} \text{ (inversion)},
+\qquad
+t_{\pi/2} = \frac{\pi}{2\omega_1}: \;\; \ket{\alpha}\to \text{the equator (coherence)}.
+\end{equation}
+%
+The $\pi/2$ pulse is the one that generates an NMR signal: it converts population
+difference into transverse coherence, which is what the detection coil sees as the free
+induction decay. And the pulse phase decides \emph{where} on the equator you land. Using
+\cref{eq:bloch-eq} with $\dvec = \hbar\omega_1\hat{x}$,
+%
+\begin{equation}
+\text{$x$-pulse: } \hat{z}\to-\hat{y},
+\qquad
+\text{$y$-pulse: } \hat{z}\to+\hat{x},
+\end{equation}
+%
+two states $\ang{90}$ apart on the equator. Both are ``the same pulse'' in every respect
+except phase.
+
+\begin{lookahead}[Where this is going: the Jaynes--Cummings model]
+Write the transverse part of \cref{eq:rotframe} using the ladder operators
+$\hat\sigma_\pm = \half(\sxo\pm\ii\syo)$:
+\begin{equation}
+\frac{\hbar\omega_1}{2}\big(\cos\varphi\,\sxo+\sin\varphi\,\syo\big)
+ = \frac{\hbar\omega_1}{2}\Big(e^{-\ii\varphi}\hat\sigma_+ + e^{+\ii\varphi}\hat\sigma_-\Big).
+\end{equation}
+The drive \emph{raises} the two-level system while supplying a phase, or \emph{lowers} it
+while absorbing one. Here the field is a classical number: $\omega_1\propto B_1$, and it
+is inexhaustible --- the system can cycle forever and the field never notices.
+
+Now promote the field to a quantum degree of freedom. The phase factors become photon
+annihilation and creation operators, $e^{-\ii\varphi}\to\hat{a}$ and
+$e^{+\ii\varphi}\to\hat{a}^\dagger$, and
+\begin{equation}
+\Hop_{\rm JC} = \frac{\hbar\omega_0}{2}\szo + \hbar\omega\,\hat{a}^\dagger\hat{a}
+  + \hbar g\big(\hat{a}\,\hat\sigma_+ + \hat{a}^\dagger\hat\sigma_-\big),
+\label{eq:jc}
+\end{equation}
+the \textbf{Jaynes--Cummings} Hamiltonian \cite{JaynesCummings} --- the single-emitter
+case of the Tavis--Cummings model built in Computational Set 4. The Hilbert space is no
+longer two dimensional; it is spin $\otimes$ boson. The classical drive strength
+$\omega_1$ is replaced by $2g\sqrt{n+1}$, so that even the vacuum ($n=0$) drives Rabi
+oscillations. That is vacuum Rabi splitting, and it is the foundation of polaritonic
+chemistry. Everything in this section is its classical-field limit.
+\end{lookahead}
+
+\begin{nbbox}[In the notebook]
+Part 5 verifies \cref{eq:rabi} against numerical propagation to $10^{-9}$ for several
+detunings, confirms that a resonant $\pi$ pulse inverts the population exactly, and
+shows that the $x$- and $y$-pulses leave the Bloch vector $\ang{90}$ apart.
+\end{nbbox}

@@ -8,6 +8,7 @@ project:
   exclude:
     - _build/**
     - instructor_solutions/**
+    - latex/**
   toc:
     - file: intro.md
     - title: Lecture Notes
@@ -22,6 +23,7 @@ project:
     - title: Computational Sets
       children:
         - file: notebooks/spin_one_half.ipynb
+        - file: notebooks/two_level_systems.ipynb
         - file: notebooks/Basis_Sets_student.ipynb
         - file: notebooks/newton_raphson.ipynb
         - file: notebooks/two_qubit_entangled_DR.ipynb

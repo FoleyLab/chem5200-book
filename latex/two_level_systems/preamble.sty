@@ -1,0 +1,151 @@
+% ============================================================================
+%  preamble.sty -- CHEM 5200 two-level systems companion notes
+%  Jay Foley, University of North Carolina Charlotte
+% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{preamble}[2026/09/14 CHEM 5200 lecture note style]
+
+% ---------------------------------------------------------------- page setup
+\RequirePackage[letterpaper,margin=1.15in,headheight=14pt]{geometry}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{mathpazo}          % Palatino text + math; comment out for Computer Modern
+\RequirePackage{microtype}
+\RequirePackage{parskip}
+
+% ---------------------------------------------------------------------- math
+\RequirePackage{amsmath,amssymb,amsthm,mathtools,bm}
+\RequirePackage{braket}
+\RequirePackage{siunitx}
+\sisetup{per-mode=symbol,detect-all}
+\DeclareSIUnit{\wavenumber}{\centi\meter\tothe{-1}}
+\DeclareSIUnit{\debye}{D}
+
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\atantwo}{atan2}
+
+% ------------------------------------------------------------------- figures
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage{tikz-3dplot}
+\RequirePackage{pgfplots}
+\RequirePackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{calc,arrows.meta,decorations.markings,decorations.pathmorphing,
+                positioning,patterns,backgrounds,fadings,3d}
+\usepgfplotslibrary{groupplots,fillbetween}
+
+% a house style for every data plot in these notes
+\pgfplotsset{
+  notestyle/.style={
+    width=0.46\textwidth, height=6.0cm,
+    tick align=outside, tick pos=left,
+    axis line style={gray!60},
+    every axis label/.append style={font=\small},
+    tick label style={font=\footnotesize},
+    legend style={font=\footnotesize, draw=gray!40, fill=white,
+                  fill opacity=0.9, text opacity=1, rounded corners=1pt},
+    label style={font=\small},
+    title style={font=\small\bfseries},
+    grid=none,
+  },
+  widenote/.style={notestyle, width=0.95\textwidth, height=7.0cm},
+}
+
+% consistent colours
+\definecolor{cUpper}{HTML}{C0392B}   % upper / antibonding / excited
+\definecolor{cLower}{HTML}{2C5FA8}   % lower / bonding / ground
+\definecolor{cAccent}{HTML}{1E7B4F}  % coupling annotations
+\definecolor{cWarm}{HTML}{D97706}    % barriers, activation
+\definecolor{cMuted}{HTML}{555555}   % diabats, guides
+\definecolor{cPurple}{HTML}{6B3FA0}  % rates
+
+% ------------------------------------------------------------------- symbols
+\newcommand{\dvec}{\mathbf{d}}
+\newcommand{\dhat}{\hat{\mathbf{d}}}
+\newcommand{\svec}{\mathbf{s}}
+\newcommand{\pauliv}{\hat{\bm{\sigma}}}
+\newcommand{\sxo}{\hat{\sigma}_x}
+\newcommand{\syo}{\hat{\sigma}_y}
+\newcommand{\szo}{\hat{\sigma}_z}
+\newcommand{\Sxo}{\hat{S}_x}
+\newcommand{\Syo}{\hat{S}_y}
+\newcommand{\Szo}{\hat{S}_z}
+\newcommand{\Hop}{\hat{H}}
+\newcommand{\Iop}{\hat{\mathbb{1}}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\dperp}{d_{\perp}}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\Ry}{\mathrm{R}}
+
+% chemistry shorthands
+\newcommand{\DA}{\mathrm{D}\text{--}\mathrm{A}}
+\newcommand{\Dm}{\mathrm{D}^{-}\!\text{--}\mathrm{A}}
+\newcommand{\Am}{\mathrm{D}\text{--}\mathrm{A}^{-}}
+
+% ------------------------------------------------------------------- callouts
+\RequirePackage[most]{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{keyresult}[1][]{
+  enhanced, breakable, colback=cLower!4, colframe=cLower!55,
+  boxrule=0.6pt, arc=2pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+  fonttitle=\bfseries\small, title={#1}}
+
+\newtcolorbox{lookahead}[1][]{
+  enhanced, breakable, colback=cPurple!4, colframe=cPurple!50,
+  boxrule=0.6pt, arc=2pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+  fonttitle=\bfseries\small, title={#1}}
+
+\newtcolorbox{nbbox}[1][]{
+  enhanced, breakable, colback=cAccent!4, colframe=cAccent!45,
+  boxrule=0.6pt, arc=2pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+  fonttitle=\bfseries\small, title={#1}}
+
+% -------------------------------------------------- problems and solutions
+\RequirePackage{enumitem}
+
+% \solutionstrue  -> instructor build (solutions printed)
+% \solutionsfalse -> student build    (solutions hidden)
+\newif\ifsolutions
+\solutionstrue
+
+\newcounter{problem}
+\newenvironment{problem}[1]
+  {\refstepcounter{problem}\par\medskip
+   \noindent\textbf{Problem \theproblem.\ #1}\par\nobreak\smallskip}
+  {\par\medskip}
+
+\newenvironment{solution}
+  {\ifsolutions
+     \par\medskip\begin{tcolorbox}[enhanced,breakable,colback=black!3,
+        colframe=black!35,boxrule=0.5pt,arc=2pt,left=8pt,right=8pt,
+        top=5pt,bottom=5pt,fonttitle=\bfseries\small,title={Solution}]
+   \else
+     \expandafter\comment
+   \fi}
+  {\ifsolutions\end{tcolorbox}\par\medskip\else\expandafter\endcomment\fi}
+
+\RequirePackage{verbatim}   % supplies \comment / \endcomment
+
+% ------------------------------------------------------------- head and foot
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\itshape CHEM 5200 \textperiodcentered\ Two-Level Electronic Systems}
+\fancyhead[R]{\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{gray!50}\leaders\hrule height \headrulewidth\hfill}}
+
+% --------------------------------------------------------------- references
+\RequirePackage[colorlinks=true,linkcolor=cLower,citecolor=cLower,
+                urlcolor=cLower,linktocpage=true]{hyperref}
+\RequirePackage[capitalise,nameinlink]{cleveref}
+\RequirePackage{booktabs}
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+\captionsetup{font=small,labelfont=bf,width=0.92\textwidth}
+\captionsetup[sub]{font=small}
+
+\endinput

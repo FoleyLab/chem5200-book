@@ -1,0 +1,74 @@
+% ============================================================================
+\section{Where does $\syo$ come from?}
+\label{sec:sigmay}
+% ============================================================================
+
+Of the four examples, only the driven system of \cref{sec:driven} carried a $\syo$ term.
+The LCAO dimer, the electron-transfer complex and ammonia all had $d_y=0$. That is not a
+coincidence, and understanding why is worth a short section.
+
+\subsection{For one static Hamiltonian, $\syo$ is a choice of convention}
+
+The overall phase of a basis vector is a convention, not physics. Rephase the second
+basis state,
+%
+\begin{equation}
+\ket{\beta} \;\longrightarrow\; e^{\ii\chi}\ket{\beta},
+\qquad\text{i.e.}\qquad
+\hat{U} = \mathrm{diag}\!\left(1, e^{\ii\chi}\right),
+\qquad
+\Hop' = \hat{U}^\dagger \Hop\, \hat{U}.
+\label{eq:rephase}
+\end{equation}
+%
+This leaves the diagonal untouched and multiplies the off-diagonal element by
+$e^{\ii\chi}$. Since $H_{\alpha\beta} = \half(d_x-\ii d_y) = \half|\dperp|e^{-\ii\varphi}$,
+choosing $\chi=\varphi$ makes $H'_{\alpha\beta}$ real and positive:
+%
+\begin{equation}
+d_x' = \dperp = \sqrt{d_x^2+d_y^2}, \qquad d_y' = 0, \qquad d_z' = d_z .
+\end{equation}
+%
+The transverse components have simply been rotated into one another. The spectrum,
+being unitarily invariant, is unchanged --- as it must be, since \cref{eq:eigenvalues}
+depends on $d_x$ and $d_y$ only through $\dperp$.
+
+\begin{keyresult}[The gauge statement]
+For a \emph{single, static} two-level Hamiltonian, a $\syo$ term carries no physical
+content: it can always be rephased away, leaving a real symmetric matrix. Every
+observable depends on $d_x$ and $d_y$ only through $\dperp = \sqrt{d_x^2+d_y^2}$.
+\end{keyresult}
+
+\subsection{Three ways to make it physical}
+
+$\syo$ acquires meaning only \emph{relative to something else} that fixes the phase
+convention. There are three such situations, and each is worth recognizing on sight.
+
+\paragraph{1. A time-dependent drive.} In \cref{sec:driven} the pulse phase $\varphi$
+moved $\dvec$ around the equatorial plane. Any \emph{single} pulse may be declared an
+``$x$-pulse'' by fiat --- but once that choice is made, the phase of the \emph{second}
+pulse in a sequence is physical and measurable. This is exactly what two-dimensional NMR
+and Ramsey interferometry exploit (Problem~\ref{prob:ramsey}).
+
+\paragraph{2. Broken time-reversal symmetry.} For a spinless electronic Hamiltonian in a
+basis of real orbitals with no magnetic field, time-reversal symmetry forces $\Hop$ to be
+real symmetric, so $d_y=0$ automatically --- which is why \cref{sec:dimer,sec:et} had
+none. To get an unremovable $\syo$ you must break that symmetry: a magnetic field, which
+attaches a Peierls phase $\beta\to\beta e^{\ii\phi_B}$ to each hopping integral;
+circularly polarized light; or \textbf{spin--orbit coupling}, which is why the effective
+$2\times2$ Hamiltonian of a Kramers doublet in a heavy-atom complex generally carries all
+three Pauli components.
+
+\paragraph{3. Three or more coupled states.} This is the subtle one. With $N$ basis states
+you have $N-1$ useful rephasings available (the overall phase does nothing), so you can
+kill at most $N-1$ hopping phases. A ring of three sites has three bonds and only two
+usable phases: one combination survives. What survives is the phase accumulated around
+the closed loop --- a magnetic flux --- and it is genuinely gauge invariant. This is the
+origin of the Aharonov--Bohm effect and, in a different guise, of the Berry phase.
+Problem~\ref{prob:peierls} works out the dimer and the triangle side by side.
+
+\begin{nbbox}[The practical rule]
+When you meet a real electronic-structure Hamiltonian in a real orbital basis, expect
+$\szo$ and $\sxo$ only. A $\syo$ term is a signal that a field, a spin--orbit
+interaction, a time-dependent drive, or a closed loop is somewhere in the problem.
+\end{nbbox}

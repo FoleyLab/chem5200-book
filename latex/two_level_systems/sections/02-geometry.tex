@@ -1,0 +1,304 @@
+% ============================================================================
+\section{Solving the general two-level problem}
+\label{sec:geometry}
+% ============================================================================
+
+\subsection{Eigenvalues without diagonalizing}
+
+The decomposition of \cref{sec:formalism} pays for itself immediately. Using the
+product rule for Pauli matrices one finds (\cref{app:pauli})
+%
+\begin{equation}
+\left(\dvec\cdot\pauliv\right)^2 = |\dvec|^2\,\Iop .
+\label{eq:dsquared}
+\end{equation}
+%
+A matrix whose square is a multiple of the identity can only have eigenvalues
+$\pm|\dvec|$, so the spectrum of $\Hop$ follows with no linear algebra at all:
+
+\begin{keyresult}[Splitting]
+\vspace{-0.35cm}
+\begin{equation}
+E_{\pm} = \varepsilon_0 \pm \frac{|\dvec|}{2}
+        = \varepsilon_0 \pm \half\sqrt{d_x^2+d_y^2+d_z^2},
+\qquad
+E_+ - E_- = |\dvec| .
+\label{eq:eigenvalues}
+\end{equation}
+\end{keyresult}
+
+\noindent
+This one formula is the bonding--antibonding splitting, the generalized Rabi frequency,
+the adiabatic gap at an avoided crossing, the Davydov splitting of an excitonic dimer,
+and the inversion doublet of ammonia. It is worth pausing on what it says. Writing
+$\dperp \equiv \sqrt{d_x^2+d_y^2}$ for the coupling magnitude,
+%
+\begin{equation}
+E_+ - E_- = \sqrt{d_z^2 + \dperp^2} \;\geq\; \dperp .
+\label{eq:noncrossing}
+\end{equation}
+%
+The asymmetry and the coupling add \emph{in quadrature}, so the splitting can never fall
+below the coupling. Even when the two basis states are exactly degenerate, they are
+split by $\dperp$. This is the \textbf{non-crossing rule}: two states that are coupled
+cannot become degenerate by tuning one parameter.
+
+\subsection{The mixing angle}
+
+Write $\dvec$ in spherical polar coordinates,
+%
+\begin{equation}
+d_z = |\dvec|\cos\theta,\qquad
+d_x = |\dvec|\sin\theta\cos\varphi,\qquad
+d_y = |\dvec|\sin\theta\sin\varphi,
+\end{equation}
+%
+so that
+%
+\begin{equation}
+\tan\theta = \frac{\dperp}{d_z},
+\qquad
+\varphi = \atantwo(d_y,d_x).
+\label{eq:mixing-angle}
+\end{equation}
+%
+Substituting into \cref{eq:pauli-components} and solving (\cref{app:eigvec}) gives the
+eigenvectors:
+
+\begin{keyresult}[Eigenvectors]
+\vspace{-0.35cm}
+\begin{align}
+\ket{+} &= \cos\tfrac{\theta}{2}\,\ket{\alpha} + e^{\ii\varphi}\sin\tfrac{\theta}{2}\,\ket{\beta},\\
+\ket{-} &= -e^{-\ii\varphi}\sin\tfrac{\theta}{2}\,\ket{\alpha} + \cos\tfrac{\theta}{2}\,\ket{\beta}.
+\label{eq:eigenvectors}
+\end{align}
+\end{keyresult}
+
+\noindent
+The angle $\theta$ is the single most useful number in two-level physics: it measures how
+thoroughly the coupling has scrambled the basis states. The population of $\ket{\alpha}$
+in the upper state is $\cos^2(\theta/2)$ and in the lower state $\sin^2(\theta/2)$.
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Regime & $\theta$ & Eigenstates are\ldots \\
+\midrule
+$d_z \gg \dperp > 0$   & $\to 0$     & essentially $\ket{\alpha},\ket{\beta}$; coupling is a perturbation \\
+$d_z = 0$              & $=\pi/2$    & exactly $50/50$; maximally delocalized \\
+$-d_z \gg \dperp > 0$  & $\to \pi$   & localized again, with the labels exchanged \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Note the half-angles in \cref{eq:eigenvectors}. As $d_z$ sweeps from $+\infty$ to
+$-\infty$ at fixed $\dperp$, $\theta$ runs from $0$ to $\pi$ and $\ket{+}$ evolves
+continuously from $\ket{\alpha}$ to $\ket{\beta}$. That continuous exchange of character,
+without the levels ever touching, \emph{is} an avoided crossing. \Cref{fig:avoided}
+shows both halves of the story.
+
+% ---------------------------------------------------------------------------
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=2 by 1, horizontal sep=1.6cm},
+  notestyle, height=6.2cm,
+  legend style={at={(0.5,-0.30)}, anchor=north, legend columns=2,
+                draw=none, fill=none, font=\footnotesize},
+  legend cell align=left,
+]
+% ---- left: the avoided crossing
+\nextgroupplot[
+  xlabel={$d_z$}, ylabel={energy},
+  title={Levels repel},
+  xmin=-6, xmax=6, ymin=-3.4, ymax=3.4,
+]
+\addplot[cMuted, dashed, thin, domain=-6:6, samples=2]{0.5*x};
+\addlegendentry{uncoupled $H_{\alpha\alpha}$}
+\addplot[cMuted, dotted, thin, domain=-6:6, samples=2]{-0.5*x};
+\addlegendentry{uncoupled $H_{\beta\beta}$}
+\addplot[cUpper, very thick, domain=-6:6, samples=200]{0.5*sqrt(x^2+1)};
+\addlegendentry{$E_+$}
+\addplot[cLower, very thick, domain=-6:6, samples=200]{-0.5*sqrt(x^2+1)};
+\addlegendentry{$E_-$}
+\draw[<->, cAccent, thick] (axis cs:0,-0.5) -- (axis cs:0,0.5);
+\node[cAccent, anchor=west, font=\footnotesize] at (axis cs:0.35,0){$\dperp$};
+
+% ---- right: the composition
+\nextgroupplot[
+  xlabel={$d_z$}, ylabel={population in $\ket{-}$},
+  title={Character is exchanged},
+  xmin=-6, xmax=6, ymin=-0.04, ymax=1.04,
+]
+\addplot[cLower, very thick, domain=-6:6, samples=300]
+  {sin(0.5*atan2(1,x))^2};
+\addlegendentry{$|\!\braket{\alpha|-}\!|^2$}
+\addplot[cUpper, very thick, domain=-6:6, samples=300]
+  {cos(0.5*atan2(1,x))^2};
+\addlegendentry{$|\!\braket{\beta|-}\!|^2$}
+\addplot[cMuted, dotted, thin, domain=-6:6, samples=2]{0.5};
+\end{groupplot}
+\end{tikzpicture}
+\caption{The two faces of an avoided crossing, for fixed coupling $\dperp = 1$.
+\textbf{Left:} the uncoupled diagonal energies (grey) cross at $d_z=0$; the
+eigenvalues of \cref{eq:eigenvalues} do not, and are separated there by exactly
+$\dperp$. \textbf{Right:} the composition of the lower eigenstate, from
+\cref{eq:eigenvectors}. The exchange of character happens over a window of width
+$\sim\dperp$ in $d_z$ --- a stronger coupling makes the switch \emph{more} gradual,
+not less.}
+\label{fig:avoided}
+\end{figure}
+% ---------------------------------------------------------------------------
+
+\subsection{Dynamics: the Bloch equation}
+\label{sec:bloch}
+
+For a normalized state $\ket{\psi}$ define the \textbf{Bloch vector}
+%
+\begin{equation}
+\svec = \Braket{\pauliv}
+      = \Big(\Braket{\psi|\sxo|\psi},\;\Braket{\psi|\syo|\psi},\;\Braket{\psi|\szo|\psi}\Big).
+\label{eq:bloch-vector}
+\end{equation}
+%
+Three real numbers, and for any pure state $|\svec| = 1$ exactly, so the state lives on
+the surface of a unit sphere. The north pole is $\ket{\alpha}$, the south pole is
+$\ket{\beta}$, the equator holds the equally weighted superpositions, and longitude on
+the equator is the relative phase. Comparing \cref{eq:bloch-vector} with
+\cref{eq:eigenvectors}, the eigenstate $\ket{+}$ sits at polar angles $(\theta,\varphi)$
+--- that is, $\svec_+ = \dhat$. \textbf{The eigenstates are the two points where the
+state vector is parallel or antiparallel to $\dvec$.}
+
+Applying the Heisenberg equation to each Pauli matrix and using
+$[\hat\sigma_a,\hat\sigma_b]=2\ii\,\epsilon_{abc}\hat\sigma_c$ gives a strikingly simple
+result, worked through in full in \cref{app:blocheq}:
+
+\begin{keyresult}[Bloch equation]
+\vspace{-0.35cm}
+\begin{equation}
+\frac{\dd\svec}{\dd t} = \frac{1}{\hbar}\,\dvec\times\svec .
+\label{eq:bloch-eq}
+\end{equation}
+\end{keyresult}
+
+\noindent
+The Bloch vector \emph{precesses about $\dvec$} at angular frequency $|\dvec|/\hbar$.
+Three consequences deserve to be stated explicitly.
+
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item \textbf{Energy is conserved.} A cross product is perpendicular to both arguments,
+so $\dvec\cdot\svec$ is constant --- which is exactly the statement that
+$\Braket{\Hop} = \varepsilon_0 + \half\dvec\cdot\svec$ does not change.
+
+\item \textbf{Eigenstates do not move.} If $\svec \parallel \dvec$ the cross product
+vanishes. Stationary states are stationary.
+
+\item \textbf{The precession frequency is the Bohr frequency.} Since
+$|\dvec| = E_+-E_-$, the rate is $(E_+-E_-)/\hbar$.
+\end{enumerate}
+
+\noindent
+Notice that $\varepsilon_0$ is absent from \cref{eq:bloch-eq}. An overall energy shift
+produces an overall phase, which no measurement on this system can detect.
+
+% ---------------------------------------------------------------------------
+\begin{figure}[t]
+\centering
+\tdplotsetmaincoords{72}{118}
+\begin{subfigure}[b]{0.47\textwidth}
+\centering
+\begin{tikzpicture}[scale=2.05]
+  % --- screen-space silhouette (NOT in 3d coords, so it stays a circle) ---
+  \shade[ball color=gray!22, opacity=0.16] (0,0) circle (1);
+  \draw[gray!50, thin] (0,0) circle (1);
+  \begin{scope}[tdplot_main_coords]
+    % equator and the xz meridian
+    \tdplotdrawarc[gray!45,thin,densely dashed]{(0,0,0)}{1}{0}{360}{}{}
+    \tdplotsetrotatedcoords{0}{90}{0}
+    \tdplotdrawarc[tdplot_rotated_coords,gray!35,thin,densely dotted]{(0,0,0)}{1}{0}{360}{}{}
+    \tdplotsetrotatedcoords{0}{0}{0}
+    % axes
+    \draw[-{Stealth[length=4pt]}, gray!65] (0,0,0) -- (1.38,0,0)
+      node[anchor=north,black!65,font=\scriptsize]{$x$};
+    \draw[-{Stealth[length=4pt]}, gray!65] (0,0,0) -- (0,1.38,0)
+      node[anchor=west,black!65,font=\scriptsize]{$y$};
+    \draw[-{Stealth[length=4pt]}, gray!65] (0,0,0) -- (0,0,1.30)
+      node[anchor=south,black!65,font=\scriptsize]{$z$};
+    % the d vector at theta = 54, phi = 40
+    \tdplotsetcoord{P}{1}{54}{40}
+    \tdplotsetcoord{Pxy}{0.809}{90}{40}
+    \draw[gray!65, dashed, thin] (P) -- (Pxy);
+    \draw[gray!65, dashed, thin] (0,0,0) -- (Pxy);
+    \draw[-{Stealth[length=6pt]}, cAccent, very thick] (0,0,0) -- (P);
+    \node[cAccent, anchor=south west, font=\small, inner sep=1pt] at (P) {$\dhat$};
+    % theta arc, in the plane containing z and d
+    \tdplotsetthetaplanecoords{40}
+    \tdplotdrawarc[tdplot_rotated_coords,cAccent,thin,-{Stealth[length=3.5pt]}]%
+      {(0,0,0)}{0.30}{0}{54}{anchor=east,font=\scriptsize,cAccent,inner sep=1.5pt}{$\theta$}
+    % phi arc, in the xy plane
+    \tdplotdrawarc[cUpper,thin,-{Stealth[length=3.5pt]}]{(0,0,0)}{0.52}{0}{40}%
+      {anchor=north west,font=\scriptsize,cUpper,inner sep=1pt}{$\varphi$}
+    % poles
+    \fill[black] (0,0,1) circle (0.9pt);
+    \node[anchor=east, font=\scriptsize, inner sep=2pt] at (0,0,1) {$\ket{\alpha}$};
+    \fill[black] (0,0,-1) circle (0.9pt);
+    \node[anchor=east, font=\scriptsize, inner sep=2pt] at (0,0,-1) {$\ket{\beta}$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Geometry. $\dvec$ has polar angles $(\theta,\varphi)$; the eigenstate
+$\ket{+}$ points along $\dhat$ and $\ket{-}$ along $-\dhat$.}
+\label{fig:bloch-geom}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.47\textwidth}
+\centering
+\begin{tikzpicture}[scale=2.05]
+  \shade[ball color=gray!22, opacity=0.16] (0,0) circle (1);
+  \draw[gray!50, thin] (0,0) circle (1);
+  \begin{scope}[tdplot_main_coords]
+    \tdplotdrawarc[gray!45,thin,densely dashed]{(0,0,0)}{1}{0}{360}{}{}
+    \draw[-{Stealth[length=4pt]}, gray!65] (0,0,0) -- (1.38,0,0)
+      node[anchor=north,black!65,font=\scriptsize]{$x$};
+    \draw[-{Stealth[length=4pt]}, gray!65] (0,0,0) -- (0,1.38,0)
+      node[anchor=west,black!65,font=\scriptsize]{$y$};
+    \draw[-{Stealth[length=4pt]}, gray!65] (0,0,0) -- (0,0,1.30)
+      node[anchor=south,black!65,font=\scriptsize]{$z$};
+    % precession cone: half-angle 54.5 deg about d-hat, which lies in the xz plane
+    \tdplotsetrotatedcoords{0}{54.5}{0}
+    \tdplotdrawarc[tdplot_rotated_coords, cUpper, very thick]%
+       {(0,0,0.5807)}{0.8141}{0}{360}{}{}
+    \tdplotsetrotatedcoords{0}{0}{0}
+    % the precession axis
+    \tdplotsetcoord{D}{1.16}{54.5}{0}
+    \draw[-{Stealth[length=6pt]}, cAccent, very thick] (0,0,0) -- (D);
+    \node[cAccent, anchor=south east, font=\small, inner sep=3pt] at (D) {$\dhat$};
+    % start of the trajectory, and a quarter period later
+    % (s(pi/2) = s_par + d-hat x s_perp, worked out for a 54.5 deg cone)
+    \fill[black] (0,0,1) circle (1.3pt);
+    \fill[cUpper] (0.4728,-0.8141,0.3372) circle (1.3pt);
+    \node[anchor=south, font=\scriptsize, inner sep=2pt] at (0,0,1.02) {$\svec(0)=\ket{\alpha}$};
+    \fill[black] (0,0,-1) circle (0.9pt);
+    \node[anchor=east, font=\scriptsize, inner sep=2pt] at (0,0,-1) {$\ket{\beta}$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Dynamics. Starting at $\ket{\alpha}$, the state sweeps a cone about $\dhat$
+at rate $|\dvec|/\hbar$ (red dot: a quarter period later).}
+\label{fig:bloch-prec}
+\end{subfigure}
+\caption{The Bloch sphere. Because the trajectory is a cone about $\dhat$, a state
+prepared at the north pole reaches the south pole only if $\dhat$ lies in the
+equatorial plane --- which is precisely the resonance condition of \cref{sec:driven}.}
+\label{fig:bloch}
+\end{figure}
+% ---------------------------------------------------------------------------
+
+\begin{nbbox}[In the notebook]
+\Cref{eq:bloch-vector} is \texttt{bloch\_vector(psi)}; time evolution is
+\texttt{propagate(H, psi0, times)}, which phases the eigenbasis coefficients rather
+than integrating an ODE. The notebook checks \cref{eq:bloch-eq} indirectly, by
+confirming that the projection $\svec\cdot\dhat$ is constant to machine precision
+along a trajectory.
+\end{nbbox}

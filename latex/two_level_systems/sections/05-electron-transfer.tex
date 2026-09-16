@@ -1,0 +1,294 @@
+% ============================================================================
+\section{Example III: donor--acceptor electron transfer}
+\label{sec:et}
+% ============================================================================
+
+\subsection{Diabatic states and a nuclear coordinate}
+
+Consider an electron transferring from a donor to an acceptor,
+$\Dm \longrightarrow \Am$. The two basis states are the \textbf{diabatic}
+(charge-localized) states $\ket{D}\equiv\ket{\alpha}$ and $\ket{A}\equiv\ket{\beta}$.
+
+What is new here is that their energies are not fixed numbers. Solvent molecules
+reorganize around whichever site currently holds the charge, so the diabatic energies
+depend on where the nuclei are. Introduce a single collective nuclear coordinate $q$ ---
+the solvent or reaction coordinate --- and model each diabatic surface as a harmonic
+well of the same force constant $k$, displaced by $\pm q_0$:
+%
+\begin{equation}
+V_D(q) = \half k(q+q_0)^2,
+\qquad
+V_A(q) = \half k(q-q_0)^2 + \Delta G^{\circ}.
+\label{eq:diabats}
+\end{equation}
+%
+The donor state is happiest at $q=-q_0$, the acceptor state at $q=+q_0$, and
+$\Delta G^\circ$ is the thermodynamic driving force. The electronic coupling
+$V_{DA} = \braket{D|\Hop|A}$ between them is essentially independent of $q$.
+
+\subsection{Identifying $\dvec$}
+
+With $\Hop(q)$ built from \cref{eq:diabats},
+%
+\begin{equation}
+d_z(q) = V_D(q)-V_A(q) = 2kq_0\,q - \Delta G^\circ,
+\qquad
+d_x = 2V_{DA},
+\qquad d_y = 0.
+\end{equation}
+%
+Defining the \textbf{reorganization energy} $\lambda \equiv 2kq_0^2$ --- the energy cost
+of distorting the nuclei from the donor's optimal geometry to the acceptor's
+\emph{without} moving the electron:
+
+\begin{keyresult}[Electron transfer]
+\vspace{-0.35cm}
+\begin{equation}
+d_z(q) = \frac{\lambda}{q_0}\,q - \Delta G^\circ,
+\qquad
+d_x = 2V_{DA}.
+\label{eq:et-d}
+\end{equation}
+\end{keyresult}
+
+\noindent
+This is the structural heart of the example, and it is worth stating plainly:
+\textbf{the $\szo$ coefficient is linear in a nuclear coordinate, and the $\sxo$
+coefficient is a constant.} Compare \cref{eq:dimer-d}, where $d_z$ was a fixed
+electronegativity difference. Here the molecule sweeps its own $d_z$ back and forth as
+it vibrates, so the parameter scan of \cref{fig:avoided} is not a hypothetical --- it is
+something the molecule physically does, many times per picosecond.
+
+\subsection{Adiabatic surfaces and the Marcus barrier}
+
+The eigenvalues of $\Hop(q)$ are the \textbf{adiabatic} potential energy surfaces --- the
+Born--Oppenheimer curves the nuclei actually move on:
+%
+\begin{equation}
+E_\pm(q) = \bar{V}(q) \pm \half\sqrt{d_z(q)^2 + 4V_{DA}^2},
+\qquad \bar{V}(q) = \half\!\left[V_D(q)+V_A(q)\right].
+\label{eq:adiabats}
+\end{equation}
+%
+Three consequences follow at once from \cref{sec:geometry}:
+
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item the diabats cross where $d_z(q^\ddagger)=0$, that is at
+      $q^\ddagger = \Delta G^\circ q_0/\lambda$;
+\item the adiabatic gap there is exactly $|d_x| = 2V_{DA}$;
+\item the activation energy, measured on the \emph{diabatic} surface from the donor
+      minimum up to the crossing, is
+      \begin{equation}
+      \Delta G^{\ddagger} = V_D(q^\ddagger) - V_D(-q_0)
+          = \frac{(\lambda+\Delta G^\circ)^2}{4\lambda},
+      \label{eq:marcus-barrier}
+      \end{equation}
+      the \textbf{Marcus} activation free energy \cite{Marcus1956,MarcusNobel}
+      (algebra in \cref{app:marcus}).
+\end{itemize}
+
+\Cref{eq:marcus-barrier} is a parabola in the driving force, minimized --- and equal to
+zero --- at $\Delta G^\circ = -\lambda$. Since the nonadiabatic rate goes as
+$k_{ET}\propto |V_{DA}|^2\exp(-\Delta G^\ddagger/k_BT)$, making a reaction \emph{more}
+exergonic speeds it up only until $-\Delta G^\circ = \lambda$, and slows it down
+thereafter. This is the celebrated \textbf{inverted region}, whose experimental
+confirmation was central to the 1992 Nobel Prize in Chemistry. \Cref{fig:et,fig:marcus}
+show the surfaces and the rate.
+
+% ---------------------------------------------------------------------------
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  widenote, height=7.4cm,
+  xlabel={nuclear (solvent) coordinate $q$},
+  ylabel={energy},
+  xmin=-2.25, xmax=2.25, ymin=-0.95, ymax=1.75,
+  legend style={at={(0.5,-0.22)},anchor=north,legend columns=2,draw=none,fill=none,
+                font=\footnotesize},
+  legend cell align=left,
+]
+% adiabats: soft thick bands underneath
+\addplot[cLower, line width=3.6pt, opacity=0.35, domain=-2.25:2.25, samples=400]
+  {0.5*(0.5*(x+1)^2 + 0.5*(x-1)^2 - 0.5) - 0.5*sqrt((2*x+0.5)^2 + 0.09)};
+\addlegendentry{adiabat $E_-$}
+\addplot[cUpper, line width=3.6pt, opacity=0.35, domain=-2.25:2.25, samples=400]
+  {0.5*(0.5*(x+1)^2 + 0.5*(x-1)^2 - 0.5) + 0.5*sqrt((2*x+0.5)^2 + 0.09)};
+\addlegendentry{adiabat $E_+$}
+% diabats on top, crisp
+\addplot[cMuted, dashed, thick, domain=-2.25:2.25, samples=200]{0.5*(x+1)^2};
+\addlegendentry{diabat $V_D$ (charge on donor)}
+\addplot[cMuted, densely dotted, thick, domain=-2.25:2.25, samples=200]{0.5*(x-1)^2-0.5};
+\addlegendentry{diabat $V_A$ (charge on acceptor)}
+% avoided crossing marker at q* = -0.25
+\draw[<->,cAccent,thick] (axis cs:-0.25,0.13125) -- (axis cs:-0.25,0.43125);
+\node[cAccent,font=\footnotesize,anchor=west] at (axis cs:-0.17,0.60){$2V_{DA}$};
+% Marcus barrier
+\draw[<->,cWarm,thick] (axis cs:-1.28,0.0) -- (axis cs:-1.28,0.2812);
+\draw[cWarm,densely dash dot,thin] (axis cs:-1.36,0.2812) -- (axis cs:-0.25,0.2812);
+\draw[cWarm,densely dash dot,thin] (axis cs:-1.36,0.0) -- (axis cs:-1.0,0.0);
+\node[cWarm,font=\footnotesize,anchor=east,fill=white,inner sep=1pt]
+  at (axis cs:-1.34,0.145){$\Delta G^{\ddagger}$};
+% minima
+\addplot[only marks, mark=*, mark size=1.6pt, black] coordinates {(-1,0) (1,-0.5)};
+\node[font=\footnotesize,anchor=north] at (axis cs:-1,-0.07){$\Dm$};
+\node[font=\footnotesize,anchor=north] at (axis cs:1,-0.57){$\Am$};
+% driving force
+\draw[<->,cPurple,thin] (axis cs:1.62,0.0) -- (axis cs:1.62,-0.5);
+\node[cPurple,font=\footnotesize,anchor=west] at (axis cs:1.66,-0.25){$\Delta G^{\circ}$};
+\draw[cPurple,densely dotted,thin] (axis cs:-1,0) -- (axis cs:1.62,0);
+\end{axis}
+\end{tikzpicture}
+\caption{Diabatic and adiabatic surfaces for
+$k=1$, $q_0=1$ (so $\lambda=2$), $\Delta G^\circ = -0.5$, $V_{DA}=0.15$. Away from the
+crossing the adiabats and diabats coincide --- the electron stays put. Near
+$q^\ddagger = \Delta G^\circ q_0/\lambda = -0.25$ the coupling splits them by $2V_{DA}$
+and the character of each adiabatic surface switches over.}
+\label{fig:et}
+\end{figure}
+% ---------------------------------------------------------------------------
+
+% ---------------------------------------------------------------------------
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=2 by 1, horizontal sep=1.5cm},
+  notestyle, height=5.8cm,
+]
+\nextgroupplot[
+  xlabel={$\Delta G^\circ/\lambda$}, ylabel={$\Delta G^{\ddagger}/\lambda$},
+  title={Activation barrier},
+  xmin=-3, xmax=0.5, ymin=-0.03, ymax=1.05,
+]
+\addplot[cWarm, very thick, domain=-3:0.5, samples=200]{(1+x)^2/4};
+\draw[cMuted,densely dotted,thin] (axis cs:-1,-0.03) -- (axis cs:-1,1.05);
+\node[cMuted,font=\footnotesize,align=center] at (axis cs:-2.1,0.62){inverted\\region};
+\node[cMuted,font=\footnotesize,align=center] at (axis cs:-0.35,0.62){normal\\region};
+
+\nextgroupplot[
+  xlabel={$\Delta G^\circ/\lambda$}, ylabel={rate $\propto e^{-\Delta G^{\ddagger}/k_BT}$},
+  title={Marcus rate ($k_BT=\lambda/20$)},
+  xmin=-3, xmax=0.5, ymode=log, ymin=1e-9, ymax=4,
+  ytick={1e-8,1e-6,1e-4,1e-2,1},
+]
+\addplot[cPurple, very thick, domain=-3:0.5, samples=300]{exp(-5*(1+x)^2)};
+\draw[cMuted,densely dotted,thin] (axis cs:-1,1e-9) -- (axis cs:-1,4);
+\end{groupplot}
+\end{tikzpicture}
+\caption{The Marcus inverted region. The barrier \eqref{eq:marcus-barrier} is a parabola
+in the driving force, so the rate is \emph{not} monotonic: past
+$-\Delta G^\circ=\lambda$ a more exergonic reaction is a slower one.}
+\label{fig:marcus}
+\end{figure}
+% ---------------------------------------------------------------------------
+
+\subsection{Landau--Zener: sweeping through the crossing}
+
+Everything above is static --- surfaces evaluated at fixed $q$. Now let the nuclei
+actually move through the crossing. If the coordinate sweeps linearly in time, $q = vt$,
+then by \cref{eq:et-d}
+%
+\begin{equation}
+d_z(t) = \alpha t, \qquad \alpha = \frac{\lambda v}{q_0}
+  = \left|\frac{\dd}{\dd t}\big(V_D-V_A\big)\right| ,
+\end{equation}
+%
+the rate at which the diabatic gap is swept. Starting far to one side in a single
+diabatic state, two outcomes compete:
+
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item \textbf{adiabatic passage} --- the system follows the lower adiabatic surface and
+therefore \emph{changes} diabatic character: the electron transfers;
+\item \textbf{diabatic passage} --- the system blasts straight through the avoided
+crossing, staying on the same diabat: no transfer.
+\end{itemize}
+
+\noindent
+Landau and Zener solved this exactly in 1932 \cite{Zener1932,Landau1932}:
+
+\begin{keyresult}[Landau--Zener]
+\vspace{-0.35cm}
+\begin{equation}
+P_{\rm diabatic} = \exp\!\left(-\frac{2\pi V_{DA}^2}{\hbar\,\alpha}\right).
+\label{eq:lz}
+\end{equation}
+\end{keyresult}
+
+\noindent
+Slow sweeps or strong coupling give adiabatic passage ($P\to0$); fast sweeps or weak
+coupling give diabatic passage ($P\to1$). Note the combination in the exponent:
+$(\text{coupling})^2$ divided by (sweep rate). Expanding for small $V_{DA}$,
+%
+\begin{equation}
+1 - P_{\rm diabatic} \approx \frac{2\pi V_{DA}^2}{\hbar\alpha},
+\end{equation}
+%
+which is the same $|V_{DA}|^2$ proportionality that appears in Fermi's golden rule and
+in the nonadiabatic Marcus rate --- the two results are the same physics seen from two
+directions.
+
+% ---------------------------------------------------------------------------
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  notestyle, width=0.62\textwidth, height=6.2cm,
+  xlabel={diabatic coupling $V_{DA}$},
+  ylabel={$P_{\rm diabatic}$},
+  xmin=0, xmax=0.53, ymin=0.13, ymax=1.05,
+  legend pos=north east, legend cell align=left,
+]
+\addplot[black, very thick, domain=0:0.53, samples=200]{exp(-2*pi*x^2)};
+\addlegendentry{Zener formula, Eq.~(\ref{eq:lz})}
+\addplot[only marks, mark=*, mark size=2.1pt, cUpper]
+  table[x index=0, y index=1] {figures/landau_zener_numeric.dat};
+\addlegendentry{numerical propagation}
+\end{axis}
+\end{tikzpicture}
+\caption{\Cref{eq:lz} against direct numerical propagation through the crossing
+($\hbar=1$, sweep rate $\alpha=1$). The numerical points come from the notebook, which
+slices the sweep into 60000 steps and evaluates $\Hop$ at the midpoint of each. The
+residual disagreement, at most $0.004$, is not step error: Zener's result is exact only
+for a sweep running from $t=-\infty$ to $+\infty$, and any truncated sweep leaves a
+little interference behind.}
+\label{fig:lz}
+\end{figure}
+% ---------------------------------------------------------------------------
+
+\begin{lookahead}[Where this is going: the Holstein model]
+Collecting \cref{eq:et-d},
+\begin{equation}
+\Hop(q) = \bar{V}(q)\,\Iop
+ + \half\!\left[\frac{\lambda}{q_0}q - \Delta G^\circ\right]\szo + V_{DA}\,\sxo .
+\end{equation}
+We treated $q$ as a \emph{classical parameter} --- a number to dial, or to sweep linearly
+in time. But $q$ is a nuclear coordinate, and nuclei are quantum. Promote it to a
+harmonic oscillator, $\hat{q}\propto(\hat{a}+\hat{a}^\dagger)$, and
+\begin{equation}
+\Hop_{\rm Holstein} = \frac{\varepsilon}{2}\szo + V_{DA}\,\sxo
+  + \hbar\omega\,\hat{a}^\dagger\hat{a}
+  + \hbar\omega g\,(\hat{a}+\hat{a}^\dagger)\,\szo ,
+\label{eq:holstein}
+\end{equation}
+the \textbf{Holstein}, or spin--boson, Hamiltonian \cite{Holstein1959,Leggett1987}.
+
+Set \cref{eq:holstein} beside \cref{eq:jc} and notice how different they are despite
+sharing a two-dimensional electronic space and one boson:
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Model & Coupling operator & The boson\ldots \\
+\midrule
+Jaynes--Cummings & $\hat{a}\hat\sigma_+ + \hat{a}^\dagger\hat\sigma_-$
+  & \textbf{flips} the two-level system \\
+Holstein & $(\hat{a}+\hat{a}^\dagger)\,\szo$
+  & \textbf{shifts} its energies \\
+\bottomrule
+\end{tabular}
+\end{center}
+One gives polaritons and vacuum Rabi splitting; the other gives vibronic progressions,
+Franck--Condon factors, and polaron formation. You have now built the single-spin
+ancestor of both.
+\end{lookahead}
