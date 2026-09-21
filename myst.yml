@@ -9,6 +9,7 @@ project:
     - _build/**
     - instructor_solutions/**
     - latex/**
+    - notebooks/two_level_systems.ipynb #<-- work in progress
   toc:
     - file: intro.md
     - title: Lecture Notes
@@ -23,12 +24,12 @@ project:
     - title: Computational Sets
       children:
         - file: notebooks/spin_one_half.ipynb
-        - file: notebooks/two_level_systems.ipynb
         - file: notebooks/Basis_Sets_student.ipynb
         - file: notebooks/newton_raphson.ipynb
         - file: notebooks/two_qubit_entangled_DR.ipynb
         - file: notebooks/vibronic_spectra_MgH_1.ipynb
         - file: notebooks/cqed_demo.ipynb
+        - file: notebooks/noble_gas_MD_Tier1_2_student_notebook.ipynb 
     - title: Psi4 Numpy Basics
       children:
         - file: resources/1a_Getting-Started.ipynb
