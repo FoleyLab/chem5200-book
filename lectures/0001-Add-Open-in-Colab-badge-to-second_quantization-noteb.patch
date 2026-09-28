@@ -1,0 +1,32 @@
+From 15d41edfe89abf16477e12251d2567eefa069003 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Mon, 28 Sep 2026 20:40:16 +0000
+Subject: [PATCH 1/2] Add Open in Colab badge to second_quantization notebook
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01JqDcAipPCQdaFbR6o4oeeD
+---
+ lectures/second_quantization.ipynb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/lectures/second_quantization.ipynb b/lectures/second_quantization.ipynb
+index 6b05493..de2b81b 100644
+--- a/lectures/second_quantization.ipynb
++++ b/lectures/second_quantization.ipynb
+@@ -1,5 +1,13 @@
+ {
+  "cells": [
++  {
++   "cell_type": "markdown",
++   "id": "colab-badge",
++   "metadata": {},
++   "source": [
++    "<a href=\"https://colab.research.google.com/github/FoleyLab/chem5200-book/blob/main/lectures/second_quantization.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
++   ]
++  },
+   {
+    "cell_type": "markdown",
+    "id": "adfe79bb",
+-- 
+2.43.0
+
