@@ -1,0 +1,416 @@
+% =====================================================================
+%  CHEM 5200 -- Practice Problems: Spin-1/2 and Ladder Operators
+%  Single-file Overleaf source (pdfLaTeX, no BibTeX).
+%
+%  Answer key switch: \solutionstrue  -> answers shown (instructor copy)
+%                     \solutionsfalse -> answers hidden (student copy)
+% =====================================================================
+\documentclass[11pt]{article}
+
+\newif\ifsolutions
+\solutionstrue      % <-- change to \solutionsfalse for the student version
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+% ---------- colours ----------
+\definecolor{handc}{HTML}{1F6FB2}
+\definecolor{codec}{HTML}{2E8B57}
+\definecolor{explc}{HTML}{B5651D}
+\definecolor{gradc}{HTML}{6A3D9A}
+\definecolor{ansc}{HTML}{8B1A1A}
+
+% ---------- part tags ----------
+\newcommand{\tagbox}[2]{\textcolor{#1}{\textsf{\textbf{[#2]}}}}
+\newcommand{\hand}{\tagbox{handc}{hand}}
+\newcommand{\code}{\tagbox{codec}{code}}
+\newcommand{\expl}{\tagbox{explc}{explain}}
+\newcommand{\handcode}{\tagbox{handc}{hand}\,$\to$\,\tagbox{codec}{code}}
+\newcommand{\codeexpl}{\tagbox{codec}{code}\,$\to$\,\tagbox{explc}{explain}}
+
+% ---------- answers (shown only in the instructor version) ----------
+\newcommand{\ans}[1]{\ifsolutions\par\noindent\hspace*{1.5em}\textcolor{ansc}{\small\textit{Answer:} #1}\fi}
+
+% ---------- grad extension box ----------
+\newtcolorbox{gradext}{enhanced,breakable,colback=gradc!4,colframe=gradc!70,
+  boxrule=0.6pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,
+  title={\textsf{\small Grad extension (optional for undergraduates)}},
+  fonttitle=\bfseries,coltitle=white}
+
+% ---------- context box ----------
+\newtcolorbox{setup}{enhanced,colback=black!3,colframe=black!25,boxrule=0.4pt,
+  arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt}
+
+% ---------- physics macros ----------
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\bra}[1]{\left\langle#1\right|}
+\newcommand{\braket}[2]{\left\langle#1\middle|#2\right\rangle}
+\newcommand{\mel}[3]{\left\langle#1\middle|#2\middle|#3\right\rangle}
+\newcommand{\expval}[1]{\left\langle#1\right\rangle}
+\newcommand{\Sop}{\hat{S}}
+\newcommand{\ad}{\hat{a}^{\dagger}}
+\newcommand{\aop}{\hat{a}}
+\newcommand{\Nop}{\hat{N}}
+\newcommand{\xop}{\hat{x}}
+\newcommand{\pop}{\hat{p}}
+\newcommand{\Hop}{\hat{H}}
+\newcommand{\one}{\mathbb{1}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\cvec}[2]{\begin{pmatrix}#1\\#2\end{pmatrix}}
+\newcommand{\mat}[4]{\begin{pmatrix}#1 & #2\\ #3 & #4\end{pmatrix}}
+\newcommand{\py}[1]{\texttt{#1}}
+
+\setlist[enumerate,1]{label=(\alph*),leftmargin=2.2em,itemsep=0.45em,topsep=0.4em}
+\setlist[itemize]{itemsep=0.15em,topsep=0.2em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setlength{\emergencystretch}{2em}
+
+\title{CHEM 5200 Practice Problems\\[2pt]
+  \large Spin-$\tfrac12$ Formalism and Ladder Operators\ifsolutions\ (Answer Key)\fi}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-3em}
+
+\begin{setup}
+\textbf{How to use these problems.}
+Each part is tagged by how it is meant to be done:
+\hand\ = pencil and paper, \code\ = Python/NumPy, \expl\ = a few sentences of physical reasoning.
+Each problem ends with an optional \emph{grad extension} that asks for a proof or a harder step.
+
+\textbf{Units and tools.} Set $\hbar = 1$ throughout (and $m=\omega=1$ for oscillators), as in the notebooks.
+Reuse the functions you built in Computational Set~1 (\py{compute\_bra\_ket}, \py{compute\_expectation})
+and the helpers in the Second Quantization notebook (\py{annihilation}, \py{creation}, \py{position},
+\py{momentum}, \py{comm}, \py{expval}).
+
+\textbf{Notation.} The $\Sop_z$, $\Sop_x$ and $\Sop_y$ eigenstates are
+\[
+\ket{\alpha}=\cvec{1}{0},\quad \ket{\beta}=\cvec{0}{1},\qquad
+\ket{X^\pm}=\frac{1}{\sqrt2}\cvec{1}{\pm1},\qquad \ket{Y^\pm}=\frac{1}{\sqrt2}\cvec{1}{\pm i}.
+\]
+\end{setup}
+
+% =====================================================================
+\section*{Part I \quad Spin-$\tfrac12$}
+% =====================================================================
+
+% ---------------------------------------------------------------------
+\subsection*{SP1. Measuring spin along a tilted axis}
+
+Along a unit vector $\hat n = (n_x, n_y, n_z)$, the spin operator is
+\[
+\Sop_n = n_x\Sop_x + n_y\Sop_y + n_z\Sop_z .
+\]
+
+\begin{enumerate}
+\item \hand\ Take $\hat n = (3/5,\,0,\,4/5)$. Check that $\hat n$ is a unit vector, then write $\Sop_n$ as a $2\times2$ matrix.
+\ans{$\Sop_n = \tfrac{\hbar}{2}\mat{4/5}{3/5}{3/5}{-4/5}$.}
+
+\item \code\ Use \py{la.eigh} on $\Sop_n$. Confirm that the eigenvalues are $\pm\hbar/2$, the same as for $\Sop_z$.
+Show that the $+$ eigenvector is proportional to $(3,1)^T$.
+\ans{$\ket{n^+} = \tfrac{1}{\sqrt{10}}\cvec{3}{1}$.}
+
+\item \hand\ A beam of $\ket{\alpha}$ atoms enters a Stern--Gerlach magnet aligned along this $\hat n$.
+What fraction leaves through the $+$ port?
+\ans{$|\braket{n^+}{\alpha}|^2 = 9/10$.}
+
+\item \code\ Repeat (b) and (c) for $\hat n = (0,\,3/5,\,4/5)$.
+Show that the $+$ eigenvector is now $\tfrac{1}{\sqrt{10}}(3,\,i)^T$ and that the probability is still $9/10$.
+\expl\ Why does tilting toward $y$ instead of $x$ leave the probability unchanged?
+\ans{Only the angle between $\hat n$ and $\hat z$ matters; tilting toward $y$ changes only the relative phase of the two components, which does not affect $|\braket{n^+}{\alpha}|^2$.}
+
+\item \code\ Tilt $\hat n$ in the $xz$-plane by an angle $\theta$, so $\hat n = (\sin\theta,\,0,\,\cos\theta)$.
+Loop $\theta$ from $0$ to $\pi$, compute $P(+)$ for an $\ket{\alpha}$ beam at each angle, and plot it against $\cos^2(\theta/2)$.
+\ans{The curves coincide; at $\theta = 60^\circ$, $P(+) = 3/4$.}
+
+\item \handcode\ Keep only the $+$ beam leaving each magnet in a chain.
+\begin{itemize}
+\item By hand: chain $z \to x \to -z$. What fraction survives?
+\item With code: use $N$ magnets, each tilted a further $\pi/N$ from the previous one, starting from $z$ and ending at $-z$.
+Compute the transmitted fraction for $N = 2, 3, 5, 10, 100$.
+\end{itemize}
+\ans{By hand: $\tfrac12\cdot\tfrac12 = \tfrac14$. In general $\cos^{2N}(\pi/2N)$: $0.25,\ 0.42,\ 0.61,\ 0.78,\ 0.976$.}
+
+\item \expl\ Adding more measurements lets almost every atom end up flipped. Explain why, using the measurement postulate.
+\ans{Each measurement projects the spin onto the new axis; for a small tilt the projection loses only $\sin^2(\pi/2N)\approx(\pi/2N)^2$ of the beam, so $N$ steps lose $\sim\pi^2/4N\to0$.}
+\end{enumerate}
+
+\begin{gradext}
+For a general $\hat n = (\sin\theta\cos\phi,\ \sin\theta\sin\phi,\ \cos\theta)$, show that
+$\ket{n^+} = \big(\cos\tfrac{\theta}{2},\ e^{i\phi}\sin\tfrac{\theta}{2}\big)^T$.
+\end{gradext}
+
+% ---------------------------------------------------------------------
+\subsection*{SP2. Expectation values and the Bloch vector}
+
+Use $\ket{\psi} = \tfrac{1}{\sqrt5}\ket{\alpha} + \tfrac{2i}{\sqrt5}\ket{\beta}$ and $\hbar = 1$.
+
+\begin{enumerate}
+\item \code\ Use \py{compute\_expectation} to find $\expval{\sigma_x}$, $\expval{\sigma_y}$ and $\expval{\sigma_z}$.
+\ans{$0$, $\ 4/5$, $\ -3/5$.}
+
+\item \hand\ Collect the three numbers into the \textbf{Bloch vector}
+$\vec r = \big(\expval{\sigma_x},\, \expval{\sigma_y},\, \expval{\sigma_z}\big)$. (You will use $\vec r$ again in SP4.)
+Compute its length $|\vec r|$.
+\expl\ What does it mean for the arrow to point mostly along $+y$ and partly along $-z$?
+\ans{$|\vec r| = 1$. The state is a spin pointing mostly along $+y$, tipped below the equator; it is more likely to be found $\beta$ than $\alpha$ ($4/5$ vs.\ $1/5$).}
+
+\item \code\ The uncertainty of an observable is $\Delta\sigma_x = \sqrt{\expval{\sigma_x^2} - \expval{\sigma_x}^2}$.
+\emph{Hint:} first compute $\sigma_x^2$ as a matrix. What do you notice?
+Compute $\Delta\sigma_x\,\Delta\sigma_y$ and compare it with the uncertainty bound $|\expval{\sigma_z}|$.
+\ans{$\sigma_x^2 = \one$. $\Delta\sigma_x\Delta\sigma_y = 1\cdot\tfrac35 = \tfrac35 = |\expval{\sigma_z}|$: the bound is met exactly.}
+
+\item \code\ Generate 1000 random normalized spinors. For each one compute $|\vec r|$, $\Delta\sigma_x\Delta\sigma_y$ and $|\expval{\sigma_z}|$.
+\begin{itemize}
+\item Confirm that $|\vec r| = 1$ every time and that the product never falls below the bound.
+\item Check numerically that $(\Delta\sigma_x\Delta\sigma_y)^2 = \expval{\sigma_z}^2 + \expval{\sigma_x}^2\expval{\sigma_y}^2$.
+\end{itemize}
+
+\item \expl\ Use the formula in (d) to say when the bound is met exactly. Why did the state in (a) meet it?
+\ans{Exactly when $\expval{\sigma_x}\expval{\sigma_y} = 0$; in (a), $\expval{\sigma_x} = 0$.}
+\end{enumerate}
+
+\begin{gradext}
+Prove the identity in (d) for any pure state. (\emph{Hint:} use $\sigma_i^2 = \one$ and $|\vec r| = 1$.)
+\end{gradext}
+
+% ---------------------------------------------------------------------
+\subsection*{SP3. Two conventions for ``raising''}
+
+This problem starts from the \emph{Note on conventions} in the spin-$\tfrac12$ lecture and in Computational Set~4.
+Set $\hbar = 1$.
+
+\begin{enumerate}
+\item \code\ Build the lecture's $\Sop_+ = \mat{0}{1}{0}{0}$ and $\Sop_- = \Sop_+^\dagger$.
+Apply each to $\ket\alpha$ and $\ket\beta$ (a numerical check of Question~13).
+
+\item \code\ Build the cavity notebook's $\sigma_+ = \mat{0}{0}{1}{0}$ and $\sigma_- = \mat{0}{1}{0}{0}$.
+Apply each to $\ket g = \cvec10$ and $\ket e = \cvec01$.
+Use \py{np.allclose} to confirm that $\sigma_+ = \Sop_+^\dagger = \Sop_-$ and $\sigma_- = \Sop_+$.
+
+\item \code\ Compute $[\Sop_+, \Sop_-]$ and $[\sigma_+, \sigma_-]$ and compare them with $\Sop_z$ and $\sigma_z$.
+\ans{$[\Sop_+,\Sop_-] = 2\Sop_z$; $\ [\sigma_+,\sigma_-] = -\sigma_z$.}
+
+\item \expl\ The two sets are the same matrices, yet the commutators differ in sign. Explain in one or two sentences why both are correct.
+\ans{The cavity $\sigma_\pm$ are the lecture's $\Sop_\mp$ with the names swapped, so $[\sigma_+,\sigma_-] = [\Sop_-,\Sop_+] = -2\Sop_z = -\sigma_z$. ``Raising'' means raising $m_s$ in one convention and raising the energy in the other.}
+
+\item \hand\ Take $\Hop = -\tfrac{\omega}{2}\sigma_z$. Find the energies of $\ket g$ and $\ket e$ and say which is lower.
+What is the $\sigma_z$ eigenvalue of the ground state, and why is the minus sign needed?
+\ans{$E_g = -\omega/2$, $E_e = +\omega/2$. The ground state has $\sigma_z = +1$; without the minus sign $\ket g$ would be the higher-energy state.}
+
+\item \code\ (Toward ladder operators.)
+\begin{itemize}
+\item Compute $\sigma_+\sigma_-$ and compare it with $\ad\aop$ for a cavity truncated to 2 states. What does each count?
+\item Compute $\sigma_+\sigma_+$, then $\ad\ad$ for a cavity truncated to 3 states. One is zero and one is not.
+In one sentence, explain the difference between a spin, whose ladder really ends, and a truncated oscillator.
+\end{itemize}
+\ans{Both equal $\mat0001$: each counts excitations (qubit excited / one photon). $\sigma_+^2 = 0$ exactly, because a spin-$\tfrac12$ has only two rungs; $(\ad)^2 \neq 0$ (entry $\sqrt2$ taking $\ket0\to\ket2$) because the oscillator ladder continues and the truncation only hides it.}
+\end{enumerate}
+
+\begin{gradext}
+The lecture's $\sigma_+ = \tfrac12(\sigma_x + i\sigma_y)$ gives $\mat0100$.
+Which combination of $\sigma_x$ and $\sigma_y$ gives the cavity notebook's $\sigma_+$?
+\ans{$\tfrac12(\sigma_x - i\sigma_y)$.}
+\end{gradext}
+
+% ---------------------------------------------------------------------
+\subsection*{SP4. Polarized and unpolarized beams}
+
+Set $\hbar = 1$. For a state $\ket\psi$ the \textbf{density matrix} is $\rho = \ket\psi\bra\psi$.
+A beam that is a mixture of states $\ket{\psi_k}$ with probabilities $p_k$ has $\rho = \sum_k p_k \ket{\psi_k}\bra{\psi_k}$.
+The probability of leaving through the $+$ port of a magnet along $\hat n$ is $\mel{n^+}{\rho}{n^+}$.
+
+\begin{enumerate}
+\item \code\ Build $\rho_X = \ket{X^+}\bra{X^+}$.
+Confirm that $\mel{n^+}{\rho_X}{n^+}$ equals $|\braket{n^+}{X^+}|^2$ for magnets along $z$, along $x$, and along the $\hat n$ from SP1(a).
+
+\item \code\ Atoms leaving the oven are unpolarized: $\rho_{\text{oven}} = \tfrac12\one$.
+Compute $P(+)$ for magnets along $z$, $x$, $y$ and SP1's $\hat n$.
+\expl\ Which single magnet tells the oven beam and the $\ket{X^+}$ beam apart?
+\ans{$P(+) = \tfrac12$ for every axis. An $x$-magnet: $\rho_X$ gives $P(+)=1$, the oven beam gives $\tfrac12$.}
+
+\item \code\ In SP2 the Bloch vector was $\vec r = (\expval{\sigma_x}, \expval{\sigma_y}, \expval{\sigma_z})$.
+For a density matrix, compute its components as $r_x = \Tr(\rho\,\sigma_x)$, and likewise for $y$ and $z$
+(for a pure state this gives the same numbers as SP2).
+\begin{itemize}
+\item Compute $\vec r$ for $\rho_X$ and for $\rho_{\text{oven}}$.
+\item Verify numerically that $\rho = \tfrac12\big(\one + r_x\sigma_x + r_y\sigma_y + r_z\sigma_z\big)$ for both.
+\end{itemize}
+\ans{$\vec r_X = (1,0,0)$; $\ \vec r_{\text{oven}} = (0,0,0)$.}
+
+\item \codeexpl\ Compute $\Tr(\rho^2)$ for both beams. What does the length of $\vec r$ tell you about a beam?
+\ans{$1$ and $\tfrac12$. $|\vec r| = 1$ means a pure state; $|\vec r| = 0$ means completely unpolarized; in general $\Tr\rho^2 = \tfrac12(1 + |\vec r|^2)$.}
+
+\item \code\ Build two beams: a 50/50 mixture of $\ket\alpha$ and $\ket\beta$, and a 50/50 mixture of $\ket{X^+}$ and $\ket{X^-}$.
+Show that their density matrices are identical.
+\expl\ Why can no experiment tell these two beams apart?
+\ans{Both equal $\tfrac12\one$. Every measurement probability is computed from $\rho$ alone, so identical $\rho$ means identical statistics for every experiment.}
+
+\item \code\ Take $\Hop = \omega_0\Sop_z$, for which $U(t) = \operatorname{diag}\!\big(e^{-i\omega_0 t/2},\, e^{i\omega_0 t/2}\big)$.
+\begin{itemize}
+\item Evolve $\ket{X^+}$ and plot the components of $\vec r(t)$.
+\item Plot the probability $P(X^+, t)$ of passing an $x$-magnet at time $t$.
+\item Show that $U\rho_{\text{oven}}U^\dagger = \rho_{\text{oven}}$. \expl\ Why does the unpolarized beam not evolve?
+\end{itemize}
+\ans{$r_x = \cos\omega_0 t$, $r_y = \sin\omega_0 t$, $r_z = 0$: the Bloch vector precesses about $z$. $P(X^+,t) = \cos^2(\omega_0 t/2)$. $\tfrac12\one$ commutes with every $U$, so it has no direction to precess.}
+\end{enumerate}
+
+\begin{gradext}
+Integrate the Liouville--von Neumann equation $\dot\rho = -i[\Hop, \rho]$ with a fourth-order Runge--Kutta step and compare with the exact result in (f).
+This is the same integrator you will use in Computational Set~4.
+\end{gradext}
+
+% =====================================================================
+\clearpage
+\section*{Part II \quad Ladder Operators}
+% =====================================================================
+
+\begin{setup}
+Recall $\aop\ket n = \sqrt n\,\ket{n-1}$, $\ \ad\ket n = \sqrt{n+1}\,\ket{n+1}$,
+$\ \xop = \tfrac{1}{\sqrt2}(\aop + \ad)$, $\ \pop = \tfrac{i}{\sqrt2}(\ad - \aop)$,
+$\ \Hop_0 = \ad\aop + \tfrac12$ (with $\hbar = m = \omega = 1$).
+\end{setup}
+
+% ---------------------------------------------------------------------
+\subsection*{LP1. IR selection rules from ladder operators}
+
+\begin{enumerate}
+\item \hand\ Find $\aop\ket2$, $\ad\ket2$, $\ad\aop\ket2$ and $\aop\ad\ket2$.
+Show that $\aop\ad\ket2 - \ad\aop\ket2 = \ket2$; this is $[\aop,\ad] = 1$ at work.
+\ans{$\sqrt2\ket1$, $\ \sqrt3\ket3$, $\ 2\ket2$, $\ 3\ket2$.}
+
+\item \hand\ Find $\ad\ad\ket1$.
+\ans{$\sqrt2\sqrt3\,\ket3 = \sqrt6\,\ket3$.}
+
+\item \hand\ Write $\xop\ket n$ in terms of number states. For which $m$ can $\mel{m}{\xop}{n}$ be nonzero?
+State this as the IR selection rule.
+\ans{$\xop\ket n = \tfrac{1}{\sqrt2}\big(\sqrt n\ket{n-1} + \sqrt{n+1}\ket{n+1}\big)$, so only $m = n\pm1$: $\Delta n = \pm1$.}
+
+\item \code\ Build \py{position(6)} and print it. Where do the nonzero entries sit?
+Tabulate $|\mel{n+1}{\xop}{n}|^2$ for $n = 0$ to $3$.
+\ans{Only on the first super- and sub-diagonals. $0.5,\ 1.0,\ 1.5,\ 2.0$, i.e.\ $(n+1)/2$.}
+
+\item \expl\ Per molecule, the $1\to2$ ``hot band'' absorbs twice as strongly as the $0\to1$ fundamental.
+For HCl ($\tilde\nu = 2886~\text{cm}^{-1}$, $kT \approx 208.5~\text{cm}^{-1}$ at 300~K), estimate the fraction of molecules in $n = 1$.
+Why are hot bands still rarely seen at room temperature?
+\ans{$e^{-2886/208.5} \approx 10^{-6}$. The per-molecule factor of 2 cannot compensate for a population a million times smaller.}
+
+\item \code\ Real dipoles are not exactly linear in $x$. Take $\mu(x) = x + 0.1\,x^2$.
+Compute $\mel{2}{\mu}{0}$ and $\mel{1}{\mu}{0}$, and the overtone-to-fundamental intensity ratio $|\mel{2}{\mu}{0}|^2/|\mel{1}{\mu}{0}|^2$.
+Which term in $\mu$ makes the overtone allowed?
+\ans{$\mel{2}{x^2}{0} = 1/\sqrt2$, so $\mel{2}{\mu}{0} = 0.0707$ and $\mel{1}{\mu}{0} = 1/\sqrt2$; ratio $= 0.010$. The $x^2$ term (electrical anharmonicity).}
+\end{enumerate}
+
+\begin{gradext}
+Use $[\aop,\ad] = 1$ to show that $[\Nop, \ad] = \ad$.
+Conclude that $\ad\ket n$ is an eigenstate of $\Nop$ with eigenvalue $n+1$.
+\end{gradext}
+
+% ---------------------------------------------------------------------
+\subsection*{LP2. Anharmonicity by counting ladder paths}
+
+\begin{enumerate}
+\item \hand\ Expand $\mel{0}{(\aop+\ad)^4}{0}$ into ordered strings of four operators.
+Keep only the strings that leave $\ket0$ and return to it without dropping below the bottom rung
+(write $U = \ad$ for a step up and $D = \aop$ for a step down).
+Weight each surviving string by its $\sqrt n$ factors and add them. What is $\mel{0}{\xop^4}{0}$?
+\ans{UUDD has weight $\sqrt1\sqrt2\sqrt2\sqrt1 = 2$; UDUD has weight $1$. Total $3$, so $\mel{0}{\xop^4}{0} = 3/4$.}
+
+\item \expl\ Using the same picture, explain why $\mel{n}{\xop^3}{n} = 0$ for every $n$.
+\ans{Three steps of $\pm1$ cannot add to zero, so no string returns to $\ket n$.}
+
+\item \code\ Compute $\mel{n}{\xop^4}{n}$ for $n = 0$ to $3$, using a basis large enough to obey the padding rule of \S1.6.
+Compare with $(6n^2 + 6n + 3)/4$.
+\ans{$0.75,\ 3.75,\ 9.75,\ 18.75$.}
+
+\item \code\ Take $\Hop = \Hop_0 + \lambda\xop^4$. The first-order energy correction is $\lambda\mel{0}{\xop^4}{0}$, so $E_0 \approx \tfrac12 + \tfrac34\lambda$.
+Compare this estimate with the lowest eigenvalue from \py{eigvalsh} in a large basis, for $\lambda = 0.01$ and $\lambda = 0.1$.
+When does first order stop being good enough?
+\ans{$\lambda=0.01$: $0.5075$ vs.\ $0.50726$. $\ \lambda = 0.1$: $0.575$ vs.\ $0.55915$. The error grows like $\lambda^2$; by $\lambda = 0.1$ it is about 3\%.}
+
+\item \code\ At $\lambda = 0.1$, compute $E_0$ for basis sizes $N = 2, 3, 4, 5, 6, 8, 12$, building $\xop^4$ from the truncated $\xop$ matrix.
+\expl\ The values jump above and below the converged answer. Using the padding rule, explain why.
+\ans{$0.525,\ 0.5696,\ 0.5578,\ 0.5586,\ 0.5594,\ 0.5591,\ 0.5591$. $N=4$ falls \emph{below} the exact $0.5591$: the truncated $\xop^4$ is wrong near the top of the ladder (paths that need the missing rungs are lost), so it is not the true $\xop^4$ restricted to the basis and the result is not a variational upper bound.}
+
+\item \expl\ Why does a cubic term $\xop^3$ do nothing to the energy at first order, even though it is the leading anharmonic term in a real bond?
+\ans{By (b), $\mel{n}{\xop^3}{n} = 0$; the cubic term first contributes at second order.}
+\end{enumerate}
+
+\begin{gradext}
+Derive $\mel{n}{\xop^4}{n} = \tfrac14(6n^2 + 6n + 3)$ by counting and weighting all return paths from rung $n$.
+\end{gradext}
+
+% ---------------------------------------------------------------------
+\subsection*{LP3. Coherent states: where the classical field comes from}
+
+The amplitude is called $z$ so it is not confused with the spin state $\ket\alpha$.
+
+\begin{enumerate}
+\item \code\ Build
+$\displaystyle \ket z = e^{-|z|^2/2}\sum_{n} \frac{z^n}{\sqrt{n!}}\ket n$
+with $z = 2$ in an $N = 40$ basis. Check that it is normalized and that $\aop\ket z = z\ket z$.
+\ans{A coherent state is an eigenstate of the lowering operator (residual $\sim10^{-12}$).}
+
+\item \code\ Compute $\expval{\Nop}$ and plot $P(n) = |\braket{n}{z}|^2$.
+\ans{$\expval{\Nop} = |z|^2 = 4$; $P(n)$ is a Poisson distribution peaked at $n = 3$--$4$.}
+
+\item \code\ Compute $\expval{\xop}$, $\Delta x$ and $\Delta p$. Compare with \S1.9.
+\ans{$\expval{\xop} = 2\sqrt2 \approx 2.83$; $\Delta x = \Delta p = 1/\sqrt2$, so $\Delta x\Delta p = \tfrac12$: like the ground state, a minimum-uncertainty state.}
+
+\item \code\ Evolve with $\ket{z(t)} = \sum_n c_n e^{-i(n+1/2)t}\ket n$.
+Plot $\expval{\xop(t)}$ and $\expval{\pop(t)}$ and check that they trace the classical orbit. Does $\Delta x$ change in time?
+\ans{$\expval{\xop} = 2.83,\ 0,\ -2.83$ at $t = 0,\ T/4,\ T/2$; $\expval{\pop}$ lags by a quarter period. $\Delta x = 1/\sqrt2$ at all times.}
+
+\item \expl\ In \S2.4 every number state gave $\mel{n}{\hat E}{n} = 0$.
+Here $\hat E = i(\hat b^\dagger - \hat b) = \sqrt2\,\pop$, so $\expval{\hat E(t)} = -4\sin t$.
+Why is laser light described by coherent states rather than number states?
+\ans{A coherent state has an oscillating mean field with the smallest allowed fluctuations, which is what a classical wave looks like; a number state has a definite photon count but zero mean field.}
+\end{enumerate}
+
+\begin{gradext}
+Show directly from the series that $\aop\ket z = z\ket z$.
+\end{gradext}
+
+% ---------------------------------------------------------------------
+\subsection*{LP4. A displaced oscillator and the Franck--Condon progression}
+
+When a molecule is electronically excited, the minimum of its bond potential shifts.
+Model the excited-state vibrational Hamiltonian as $\Hop_e = \Hop_0 + g(\aop + \ad)$.
+
+\begin{enumerate}
+\item \hand\ Write $g(\aop+\ad)$ in terms of $\xop$. Explain why this term shifts the potential minimum sideways, and in which direction for $g > 0$.
+\ans{$g(\aop+\ad) = \sqrt2\,g\,\xop$. $\tfrac12x^2 + \sqrt2 g x$ is a parabola with its minimum moved to $x = -\sqrt2 g$.}
+
+\item \code\ Diagonalize $\Hop_e$ in an $N = 40$ basis for $g = 1$.
+\begin{itemize}
+\item Show that the levels are still evenly spaced but lowered: $E_n = n + \tfrac12 - g^2$.
+\item Show that the new ground state $\ket\psi$ satisfies $\aop\ket\psi = -g\ket\psi$, so it is a coherent state (LP3) with $z = -g$, and that $\expval{\xop} = -\sqrt2\,g$.
+\end{itemize}
+\ans{$E = -0.5,\ 0.5,\ 1.5,\dots$; $\expval{\xop} = -1.414$.}
+
+\item \code\ Absorption starts from the ground state of $\Hop_0$, which is $\ket0$.
+Compute the Franck--Condon factors $|\braket{\psi_n^{(e)}}{0}|^2$ for $n = 0$ to $4$ and compare with the Poisson distribution $e^{-S}S^n/n!$, where $S = g^2$ is the Huang--Rhys factor.
+\ans{$g = 1$: $0.368,\ 0.368,\ 0.184,\ 0.061,\ 0.015$ (exact match).}
+
+\item \code\ Repeat for $g = \sqrt2$ ($S = 2$). Plot both progressions as stick spectra.
+\expl\ How does the size of the shift control which vibronic peak is tallest?
+\ans{$0.135,\ 0.271,\ 0.271,\ 0.180,\ 0.090$. Larger displacement moves the intensity maximum to higher $n$ (near $n \approx S$); small displacement leaves the $0$--$0$ line strongest.}
+
+\item \expl\ What does the energy shift $-g^2$ mean physically? Connect it to the MgH vibronic-spectra notebook.
+\ans{It is the relaxation (reorganization) energy gained by letting the bond relax to its new equilibrium; it is why the $0$--$0$ line sits below the vertical transition energy.}
+\end{enumerate}
+
+\begin{gradext}
+Show that substituting $\aop = \hat b - g$ turns $\Hop_e$ into $\hat b^\dagger\hat b + \tfrac12 - g^2$.
+\end{gradext}
+
+\end{document}
